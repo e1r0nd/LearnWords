@@ -69,17 +69,21 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (Repeat.wordsRepeat.first.length || Repeat.wordsRepeat.second.length) {
 				var id = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index,
 					wordPlaceholder = '';
-				
+				var arrWords = new Array();	
 				$(checkWordInp).text(Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'word' : 'translate']).data('id', id);
-				$('[data-type=checkWordBtn]').each(function(index, node){
-					if (index == Utils.getRandomInt(0, 2)) {
-						wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0][(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
-					} else {
-						wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];
-					}
+				
+				var arrOptionButtons = $('[data-type=checkWordBtn]');
+				//the answer buttons are shuffled so that we don't know which one is the correct word.
+				Utils.shuffle(arrOptionButtons);
+				
+				arrOptionButtons.each(function(index, node){
+
+					wordPlaceholder = Repeat.getWord(index, arrWords);
+					
+					arrWords[index] = wordPlaceholder;	
+					
 					$(this).text(wordPlaceholder);
-				});
-				$(enterBtn).data('direction', true);
+				});				$(enterBtn).data('direction', true);
 				$(checkWord).removeClass('nodisplay');
 				$(enterWord).addClass('nodisplay');
 				$(noWordsRepeat).addClass('nodisplay');
