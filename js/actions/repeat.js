@@ -48,6 +48,23 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			$(repeatWordsTopSNum).text(wordsRepeatLength);
 		},
 		
+		getWord: function(index, arrWords){
+			//if index is 0 we get the correct word. The other words are random
+			if (index == 0) {
+				wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0]		[(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
+			} else {
+				wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];	
+			}
+			
+			if(arrWords.indexOf(wordPlaceholder) >= 0)
+			{
+				Repeat.getWord(index, arrWords);
+			}
+			
+			return wordPlaceholder;
+		},
+
+
 		showWord: function(){ //show a next word to Repeat
 			if (Repeat.wordsRepeat.first.length || Repeat.wordsRepeat.second.length) {
 				var id = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].index,
