@@ -40,6 +40,43 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 				}
 			}
 		},
+
+
+                removeWords: function(){
+			if (localStorageAPI.isOK) {
+                        "use strict";
+                        var key;
+                        var st; 
+                        var keysToDelete = [];
+
+                        var prefixForNumber = 'learnWords-index';  
+
+                        // go through all keys starting with the name
+                        // of the database, i.e 'learnWords-index14'
+                        for (var i = 0; i < localStorage.length; i++){
+                            key = localStorage.key(i);
+                            st = localStorage.getItem(key);                            
+    
+                            if (key.lastIndexOf(prefixForNumber,0) === 0) {
+                                keysToDelete.push(key);
+                            };
+			};
+                        // now we have all the keys which should be deleted
+                        // in the array keysToDelete.
+                        console.log(keysToDelete);
+                        keysToDelete.forEach(function(aKey){
+                             localStorage.removeItem(aKey);
+			});
+
+                        // reset index
+                        localStorage.setItem('learnWords-words', '');
+
+                        // this one triggers that memorystore is executed
+                        localStorage.removeItem('learnWords-settings');
+                        }
+
+		},
+
 		
 		init: function(){
 			localStorageAPI.isOK = false;
