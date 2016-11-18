@@ -1,11 +1,14 @@
-﻿/**************************************************
+/**************************************************
 * Learn Words // local.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+*
+* Updated by Hannes Hirzel, November 2016
+*
 * Placed in public domain.
 **************************************************/
-if(typeof(local) == 'undefined' || local == null || !local){
-	local = {
+if(typeof(LW.local) == 'undefined' || LW.local == null || !LW.local){
+	LW.local = {
 	
 		en_GB: {
 			summary: 'Summary',
@@ -110,7 +113,7 @@ if(typeof(local) == 'undefined' || local == null || !local){
 				langSelect = $('[data-type=lang-select]');
 			
 			$(langNode).each(function(i, node){
-				$(node).text(local[local.currentLocal][$(node).data('lang')]);
+				$(node).text(LW.local[LW.local.current][$(node).data('lang')]);
 			});
 			$(langSelect).each(function(i, node){
 				$(node).removeClass('selected');
@@ -118,20 +121,21 @@ if(typeof(local) == 'undefined' || local == null || !local){
 		},
 		
 		langSelect: function(){ //change localization
-			local.currentLocal = $(this).data('lang');
+			LW.local.current = $(this).data('lang');
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
-			local.changeLocalContent();
-			localStorageAPI.storeItem('learnWords-language', local.currentLocal);
+			LW.local.changeLocalContent();
+			LW.wdsDB.put('learnWords-language', LW.local.current);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			local.currentLocal = localStorageAPI.readItem('learnWords-language');
-			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
+			LW.local.current = LW.wdsDB.get('learnWords-language');
+			$(document).on('click touchstart', '[data-type=lang-select]', LW.local.langSelect);
 		}
 	}
 	
-	local.init();
+	LW.local.init();
 }
+

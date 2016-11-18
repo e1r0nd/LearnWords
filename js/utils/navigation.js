@@ -1,12 +1,12 @@
 /**************************************************
 * Learn Words // navigation.js
-* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+* Coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
+* 
 * Placed in public domain.
 **************************************************/
-if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
+if(typeof(LW.Navig) == 'undefined' || LW.Navig == null || !LW.Navig){
 	
-	Navigation = {
+	LW.Navig = {
 	
 		hashguard: function(init){ //onHashChange
 			if (init) this.hash = window.location.hash;
@@ -14,7 +14,7 @@ if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
 				$(window).trigger('hashbreak', {"prevhash":this.hash});
 				this.hash = window.location.hash;
 			}
-			setTimeout('Navigation.hashguard(false)', 50);
+			setTimeout('LW.Navig.hashguard(false)', 50);
 		},
 		
 		hashbreak: function(){ //hashchange event
@@ -36,16 +36,16 @@ if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
 			});
 			$(this).parent().addClass('active');
 			$('#'+$(this).data('target')).removeClass('nodisplay');
-			Utils.closeMobMenu();
+			LW.Utils.closeMobMenu();
 		},
 		
 		init: function(){
-			$(document).on('click touchstart', '[data-type=nav-select]', Navigation.navSelect);
-			$(window).bind('hashbreak', Navigation.hashbreak);
-			Navigation.hashguard(false);
+			$(document).on('click touchstart', '[data-type=nav-select]', LW.Navig.navSelect);
+			$(window).bind('hashbreak', LW.Navig.hashbreak);
+			LW.Navig.hashguard(false);
 		}
 	};
 	
-	Navigation.init();
+	LW.Navig.init();
 }
 

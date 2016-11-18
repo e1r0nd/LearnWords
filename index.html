@@ -89,14 +89,30 @@
 	</div>
 	
 	<div id="repeat" data-toggle="nav" class="center nodisplay">
+
 		<div id="checkWord" class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h3 id="checkWordInp" data-id="" data-direction=""></h3>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+				<div class="row row-content">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div class="row row-content" style="margin-top:10px;">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div id=feedback></div>
 			</div>
 		</div>
+
 		<div id="enterWord" class="row nodisplay">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="form-group">
@@ -172,20 +188,40 @@
     </footer>
 </div>
 
+
+
+
+
+
 <script src="js/lib/jquery-1.11.0.min.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 
+
+
+<script src="js/utils/LWdb.js"></script>
 <script src="js/utils/utils.js"></script>
-<script src="js/utils/localstorage.js"></script>
 <script src="js/utils/memorystore.js"></script>
 <script src="js/utils/navigation.js"></script>
 <script src="js/local/local.js"></script>
 
+
+
+<!--
+The following four files have been combined into actions.js
+and thus been deleted. Establish them later.
 <script src="js/actions/settings.js"></script>
 <script src="js/actions/vocabulary.js"></script>
 <script src="js/actions/learn.js"></script>
 <script src="js/actions/repeat.js"></script>
+-->
+
+<script src="js/actions/actions.js"></script>
+
 
 <script src="js/main.js"></script>
+
+
+
+
 </body>
 </html>

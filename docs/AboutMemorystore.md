@@ -218,15 +218,15 @@ The result should look like the code below. Save the file.
 * Placed in public domain.
 **************************************************/
 
-if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+if (LW.wdsDB.isOK && (LW.wdsDB.get('learnWords-settings') == 'undefined' || LW.wdsDB.get('learnWords-settings') == null)) {
     settings = {
         first : 1,
         second: 3,
         third: 7
     };
-    localStorageAPI.storeItem('learnWords-settings', settings);
+    LW.wdsDB.put('learnWords-settings', settings);
 
-    localStorageAPI.storeItem('learnWords-language', 'en_GB');
+    LW.wdsDB.put('learnWords-language', 'en_GB');
 
 var theWords = [
   {
@@ -323,13 +323,13 @@ theWords.forEach(function(element){
   element.index = "index"+i;
   element.step = 0;
   element.date = 0;
-  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  LW.wdsDB.put('learnWords-'+element.index, element);
   arrayOfKeys.push(element.index);
 }
 
 );
 
-localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+LW.wdsDB.put('learnWords-words', arrayOfKeys.join());
 
 console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 }

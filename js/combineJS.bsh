@@ -1,0 +1,12 @@
+cat utils/utils.js>> all.js
+cat utils/localstorage.js>> all.js
+cat utils/memorystore.js>> all.js
+cat utils/navigation.js>> all.js
+cat local/local.js>> all.js
+
+cat actions/settings.js>> all.js
+cat actions/vocabulary.js>> all.js
+cat actions/learn.js>> all.js
+cat actions/repeat.js>> all.js
+
+cat main.js>> all.js
