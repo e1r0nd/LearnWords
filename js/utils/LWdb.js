@@ -49,6 +49,45 @@ LW.db = {
 			}
 		},
 
+	
+	
+	        putSettings: function(theSettingsObj){
+                    	LW.db.storeItem('learnWords-words-settings', theSettingsObj);
+		},
+
+
+		getSettings: function(){
+			
+			var settings = LW.db.readItem('learnWords-words-settings');
+                        if (!settings) {
+                            // the app runs for the first time, thus
+			    // initialize the setting object neeeds to be initialized
+			    // with default values.
+
+                            // first is for box (or step) 1 in the Leitner box; 
+                            //       ask the word again after 1 day
+                            // second is for box 2 ; ask the word again after 3 days
+                            // third is for box 3 ; ask the word again after 7 days
+
+                            // Note: box 0 is for the Learn mode and it not set 
+                            // as the words are accessible all the time
+                      
+			    settings = {
+        				first : 1,
+        				second: 3,
+        				third: 7
+    			     };
+    			     LW.db.storeItem('learnWords-settings', settings);
+    			     LW.db.storeItem('learnWords-language', 'en_GB');
+
+                        };
+
+	                return settings
+		},
+
+
+	
+	
 
 		loadWords: function(theWords) {
 				var i= 0;
