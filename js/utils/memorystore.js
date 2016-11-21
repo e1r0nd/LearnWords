@@ -6,18 +6,11 @@
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db.readItem('learnWords-settings') == null)) {
-	settings = {
-		first : 1,
-		second: 3,
-		third: 7
-	};
-	LW.db.storeItem('learnWords-settings', settings);
-	
-	LW.db.storeItem('learnWords-language', 'en_GB');
+if (LW.db.isOK && (LW.db.readItem(LW.db.name+'-settings') == 'undefined' || LW.db.readItem(LW.db.name+'-settings') == null)) {
+
 	
 	var words = ['index1', 'index2', 'index3', 'index4', 'index5', 'index6', 'index7', 'index8', 'index9', 'index10', 'index11', 'index12', 'index13', 'index14'];
-	LW.db.storeItem('learnWords-words', words.join());
+	LW.db.storeItem(LW.db.name+'-words', words.join());
 	
 	index1 = {
 		index: 'index1',
@@ -26,7 +19,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index1', index1);
+	LW.db.storeItem(LW.db.name+'-index1', index1);
 	
 	index2 = {
 		index: 'index2',
@@ -35,7 +28,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index2', index2);
+	LW.db.storeItem(LW.db.name+'-index2', index2);
 
 	index3 = {	
 		index: 'index3',
@@ -44,7 +37,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index3', index3);
+	LW.db.storeItem(LW.db.name+'-index3', index3);
 	
 	index4 = {	
 		index: 'index4',
@@ -53,7 +46,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index4', index4);
+	LW.db.storeItem(LW.db.name+'-index4', index4);
 	
 	index5 = {
 		index: 'index5',
@@ -62,7 +55,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index5', index5);
+	LW.db.storeItem(LW.db.name+'-index5', index5);
 	
 	index6 = {
 		index: 'index6',
@@ -71,7 +64,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index6', index6);
+	LW.db.storeItem(LW.db.name+'-index6', index6);
 	
 	index7 = {
 		index: 'index7',
@@ -80,7 +73,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index7', index7);
+	LW.db.storeItem(LW.db.name+'-index7', index7);
 	
 	index8 = {
 		index: 'index8',
@@ -89,7 +82,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 0,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index8', index8);
+	LW.db.storeItem(LW.db.name+'-index8', index8);
 	
 	index9 = {
 		index: 'index9',
@@ -98,7 +91,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 1,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index9', index9);
+	LW.db.storeItem(LW.db.name+'-index9', index9);
 	
 	index10 = {
 		index: 'index10',
@@ -107,7 +100,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 1,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index10', index10);
+	LW.db.storeItem(LW.db.name+'-index10', index10);
 	
 	index11 = {
 		index: 'index11',
@@ -116,7 +109,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 1,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index11', index11);
+	LW.db.storeItem(LW.db.name+'-index11', index11);
 	
 	index12 = {
 		index: 'index12',
@@ -125,7 +118,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 2,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index12', index12);
+	LW.db.storeItem(LW.db.name+'-index12', index12);
 	
 	index13 = {
 		index: 'index13',
@@ -134,7 +127,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 2,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index13', index13);
+	LW.db.storeItem(LW.db.name+'-index13', index13);
 	
 	index14 = {
 		index: 'index14',
@@ -143,7 +136,7 @@ if (LW.db.isOK && (LW.db.readItem('learnWords-settings') == 'undefined' || LW.db
 		step: 3,
 		date: 0
 	};
-	LW.db.storeItem('learnWords-index14', index14);
+	LW.db.storeItem(LW.db.name+'-index14', index14);
 	
 	console.log(localStorage);
 }

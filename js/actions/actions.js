@@ -1,4 +1,4 @@
-/**************************************************
+/**********************************************
  * actions.js
  *
  * combination of
@@ -14,6 +14,7 @@
  *
  * Placed in public domain.
  **************************************************/
+
 if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
     Settings = {
@@ -120,7 +121,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 "use strict";
                 if (!Learn.wordsLearn.length) {
                     $(LW.db.index).each(function(index, node) { //the initial counting
-                        var item = LW.db.readItem('learnWords-' + node);
+                        var item = LW.db.readItem(LW.db.name+'-' + node);
                         if (item) {
                             if (item.step == 0) {
                                 Learn.wordsLearn.push(item);
@@ -158,7 +159,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                         date: (step == 1) ? (Utils.getToday() + Utils.delay * Settings.params.first) : 0
                     };
 
-                    LW.db.storeItem('learnWords-' + Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+                    LW.db.storeItem(LW.db.name+'-' + Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 
                     if (reindex) {
                         Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -226,7 +227,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 "use strict";
                 if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
                     $(LW.db.index).each(function(index, node) { //the initial counting
-                        var item = LW.db.readItem('learnWords-' + node);
+                        var item = LW.db.readItem(LW.db.name+'-' + node);
                         if (item) {
                             if (Utils.getToday() > item.date) { //if this word is for today
 
@@ -305,7 +306,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 if (step) {
 
 
-                    LW.db.storeItem('learnWords-' + Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+                    LW.db.storeItem(LW.db.name+'-' + Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 
                     if (reindex) {
                         Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -338,7 +339,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     word.step--;
                     word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + Utils.delay * Settings.params.first;
                 }
-                LW.db.storeItem('learnWords-' + word.index, word); //save word
+                LW.db.storeItem(LW.db.name+'-' + word.index, word); //save word
                 Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
                 Learn.wordsLearn = [];
                 Learn.recountIndexLearn();
@@ -361,7 +362,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                     word.step--;
                     word.date = Utils.getToday() + Utils.delay * Settings.params.second;
                 };
-                LW.db.storeItem('learnWords-' + word.index, word); //save word
+                LW.db.storeItem(LW.db.name+'-' + word.index, word); //save word
                 Repeat.wordsRepeat.third.splice(0, 1); //remove from index
                 Learn.wordsLearn = [];
                 Learn.recountIndexLearn();
@@ -427,9 +428,9 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
                 if (!notReindex) {
                     LW.db.index.splice(id, 1); //remove from index
-                    LW.db.storeItem('learnWords-words', LW.db.index.join());
+                    LW.db.storeItem(LW.db.name+'-words', LW.db.index.join());
                 }
-                LW.db.removeItem('learnWords-' + node); //remove this word
+                LW.db.removeItem(LW.db.name+'-' + node); //remove this word
                 $('#' + node).remove();
                 $('#' + node + 'Edit').remove();
                 Vocabulary.recountTotal();
@@ -452,7 +453,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                 $(LW.db.index).each(function(index, node) {
                     "use strict";
                     var txt, translate;
-                    var item = LW.db.readItem('learnWords-' + node);
+                    var item = LW.db.readItem(LW.db.name+'-' + node);
                     if (item) {
                         txt = item.word;
                         translate = item.translate;
@@ -500,7 +501,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
                     // save newly added word
                     newIndexVal = 'index' + (LW.db.index.length + 1);
-                    LW.db.storeItem('learnWords-' + newIndexVal, word);
+                    LW.db.storeItem(LW.db.name+'-' + newIndexVal, word);
 
                     var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g, todayDate).replace(/{{txt}}/g, inputWord).replace(/{{translate}}/g, inputTranslate).replace(/{{index}}/g, (addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
 
@@ -519,7 +520,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                         Vocabulary.removeWord($('#del-' + id), true);
                     }
 
-                    LW.db.storeItem('learnWords-words', LW.db.index.join()); //add word to Vocabulary list
+                    LW.db.storeItem(LW.db.name+'-words', LW.db.index.join()); //add word to Vocabulary list
                     Utils.clearFields();
                     Vocabulary.recountTotal();
                     Learn.wordsLearn = [];

@@ -118,41 +118,6 @@ LW.db = {
 			}
 		},
 
-                removeWords: function(){
-			if (LW.db.isOK) {
-                        "use strict";
-                        var key;
-                        var st; 
-                        var keysToDelete = [];
-
-                        var prefixForNumber = LW.db.name+'-index';  
-
-                        // go through all keys starting with the name
-                        // of the database, i.e 'learnWords-index14'
-                        for (var i = 0; i < localStorage.length; i++){
-                            key = localStorage.key(i);
-                            st = localStorage.getItem(key);                            
-    
-                            if (key.lastIndexOf(prefixForNumber,0) === 0) {
-                                keysToDelete.push(key);
-                            };
-			};
-                        // now we have all the keys which should be deleted
-                        // in the array keysToDelete.
-                        console.log(keysToDelete);
-                        keysToDelete.forEach(function(aKey){
-                             localStorage.removeItem(aKey);
-			});
-
-                        // reset index
-                        localStorage.setItem(LW.db.name+'-words', '');
-
-                        // this one triggers that memorystore is executed
-                        localStorage.removeItem(LW.db.name+'-settings');
-                        }
-
-		},
-
 
                 dumpWords: function(aKeyPrefix) {
 		           if (LW.db.isOK) {
@@ -179,6 +144,58 @@ LW.db = {
                             console.log(JSON.stringify(result));
                            }
                 },	
+
+
+
+
+		removeObjects: function(aKeyPrefix){
+			if (LW.db.isOK) {
+                         var key;
+                         var st; 
+                         var keysToDelete = [];
+
+                         // go through all keys starting with the name
+                         // of the database, i.e 'learnWords-index14'
+                         for (var i = 0; i < localStorage.length; i++){
+                            key = localStorage.key(i);
+                            st = localStorage.getItem(key);                             
+    
+                            if (key.lastIndexOf(aKeyPrefix,0) === 0) {
+                                keysToDelete.push(key);
+                            };
+			 };
+                         // now we have all the keys which should be deleted
+                         // in the array keysToDelete.
+                         console.log(keysToDelete);
+                         keysToDelete.forEach(function(aKey){
+                              localStorage.removeItem(aKey);
+			 });
+                       }
+		},
+
+
+		removeWords: function(){
+
+                        var aKeyPrefix = LW.db.name+'-index';  
+                        LW.db.removeObjects(aKeyPrefix);
+
+                        // reset index
+                        localStorage.setItem(LW.db.name+'-words', '');
+
+                        // this one triggers that memorystore is executed
+                        localStorage.removeItem(LW.db.name+'-settings');
+
+		},
+
+
+
+		destroy: function(){
+
+                        var aKeyPrefix = LW.db.name;  
+
+                        LW.db.removeObjects(aKeyPrefix);
+
+		},
 
 
 		
