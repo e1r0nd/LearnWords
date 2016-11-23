@@ -71,7 +71,7 @@ LW.db = {
 
                             // Note: box 0 is for the Learn mode and it not set 
                             // as the words are accessible all the time
-                      
+                            console.log('initialize settings');
 			    settings = {
         				first : 1,
         				second: 3,
@@ -98,12 +98,12 @@ LW.db = {
   					 element.index = "index"+i;
   					 element.step = 0;
   					 element.date = 0;
-  					 LW.db.put(LW.db.name+'-'+element.index, element);
+  					 LW.db.storeItem(LW.db.name+'-'+element.index, element);
   					 arrayOfKeys.push(element.index);
 					}
 				);
 
-                                LW.db.put(LW.db.name+'-words', arrayOfKeys.join());
+                                LW.db.storeItem(LW.db.name+'-words', arrayOfKeys.join());
                                 LW.db.index = arrayOfKeys; 
 
                                 console.log(arrayOfKeys.length + " words loaded");
@@ -216,6 +216,6 @@ LW.db = {
 	
 
 // initialize database sub-object
-LW.db.init("learnWords");
+LW.db.init("LWdb");
 
 

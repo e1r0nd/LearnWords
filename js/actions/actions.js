@@ -96,8 +96,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
             $(document).on('click touchstart', '#cancelSettings', Settings.cancelSetting);
         }
     };
-
-
+}
 
 
     if (typeof(Learn) == 'undefined' || Learn == null || !Learn) {
@@ -129,6 +128,7 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
                         }
                     });
                 }
+                console.log('Learn recountIndexLearn', Learn.wordsLearn);
                 var wordsLearnLength = (Learn.wordsLearn.length) ? Learn.wordsLearn.length : '';
 
                 $(learnWordsNum).text(wordsLearnLength || '0');
@@ -198,6 +198,9 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
         Learn.init();
     }
+
+
+
 
 
 
@@ -385,6 +388,8 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
 
 
+
+
     /**************************************************
      * Learn Words // vocabulary.js
      * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
@@ -548,3 +553,4 @@ if (typeof(Settings) == 'undefined' || Settings == null || !Settings) {
 
         Vocabulary.init();
     }
+

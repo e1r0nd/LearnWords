@@ -5,6 +5,7 @@
 * Placed in public domain.
 **************************************************/
 if(typeof(local) == 'undefined' || local == null || !local){
+console.log("define local");
 	local = {
 	
 		en_GB: {
@@ -128,6 +129,7 @@ if(typeof(local) == 'undefined' || local == null || !local){
 		},
 		
 		init: function(){
+                        var settings = LW.db.getSettings(); // to force initialisation.
 			local.currentLocal = LW.db.readItem(LW.db.name+'-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
 		}
