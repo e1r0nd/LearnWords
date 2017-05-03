@@ -10,6 +10,6 @@
 
 ## Repeat Mode
 
-## Vacabulary
+## Vocabulary
 
 ## Options
