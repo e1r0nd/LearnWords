@@ -6,10 +6,10 @@
 One page application for learning words by Leitner system.
 
 ## Annotation
-Started in *March 2014.* Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, hashtag navigation, HTML-templates, localization.
+Started in *March 2014.* Developed with JavaScript (ES6), used Webpack2. Mobile first, Responsive design, local storage, hashtag navigation, HTML-templates, localization.
 
 ## Documentation
-[User Manual](docs/UserManual.md)
+[User Manual](docs/UserManual.md)<br>
 [How to create a file memorystore.js](docs/AboutMemorystore.md)
 
 ## Author
