@@ -19,6 +19,10 @@ import NavigationClass from "./components/Navigation";
 const Navigation = new NavigationClass();
 Main.appendChild(Navigation.createBlock());
 
+import LearnClass from "./components/Learn";
+const Learn = new LearnClass();
+Main.appendChild(Learn.createBlock());
+
 import SettingsClass from "./components/settings";
 const Settings = new SettingsClass();
 Main.appendChild(Settings.createBlock());
@@ -37,11 +41,6 @@ import { Vocabulary } from "./js/actions/vocabulary";
 Vocabulary.init();
 Vocabulary.viewWord();
 
-import { Learn } from "./js/actions/learn";
-Learn.init();
-Learn.recountIndexLearn();
-Learn.showWord();
-
 import { Repeat } from "./js/actions/repeat";
 Repeat.init();
 Repeat.recountIndexRepeat();
@@ -59,5 +58,10 @@ document.querySelector("body").appendChild(Main);
 
 // Init, add event listeners
 Navigation.init();
+
+Learn.init();
+Learn.recountIndexLearn();
+Learn.showWord();
+
 Settings.init();
 locale.init();

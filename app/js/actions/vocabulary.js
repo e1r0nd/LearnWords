@@ -6,7 +6,7 @@
  **************************************************/
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
-import {Learn} from './learn';
+// import {Learn} from './learn';
 import {Repeat} from './repeat';
 
 import rowTemplate from '../../components/row-word/row-word.html';
@@ -43,8 +43,8 @@ const Vocabulary = {
     $(`#${node}`).remove();
     $(`#${node}Edit`).remove();
     Vocabulary.recountTotal();
-    Learn.wordsLearn = [];
-    Learn.recountIndexLearn();
+    // Learn.wordsLearn = [];
+    // Learn.recountIndexLearn();
     Repeat.wordsRepeat = {
       currentIndexFirst: 0,
       first: [],
@@ -129,9 +129,9 @@ const Vocabulary = {
       LW.storeItem(`${LW.name}-words`, LW.index.join()); //add word to Vocabulary list
       Vocabulary.clearFields();
       Vocabulary.recountTotal();
-      Learn.wordsLearn = [];
-      Learn.recountIndexLearn();
-      Learn.showWord();
+      // Learn.wordsLearn = [];
+      // Learn.recountIndexLearn();
+      // Learn.showWord();
     }
   },
 
