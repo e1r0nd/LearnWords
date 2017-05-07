@@ -23,7 +23,11 @@ import LearnClass from "./components/Learn";
 const Learn = new LearnClass();
 Main.appendChild(Learn.createBlock());
 
-import SettingsClass from "./components/settings";
+import RepeatClass from "./components/Repeat";
+const Repeat = new RepeatClass();
+Main.appendChild(Repeat.createBlock());
+
+import SettingsClass from "./components/Settings";
 const Settings = new SettingsClass();
 Main.appendChild(Settings.createBlock());
 
@@ -41,11 +45,6 @@ import { Vocabulary } from "./js/actions/vocabulary";
 Vocabulary.init();
 Vocabulary.viewWord();
 
-import { Repeat } from "./js/actions/repeat";
-Repeat.init();
-Repeat.recountIndexRepeat();
-Repeat.showWord();
-
 /* Generate the Page */
 
 import { locale } from "./actions/Locale";
@@ -62,6 +61,10 @@ Navigation.init();
 Learn.init();
 Learn.recountIndexLearn();
 Learn.showWord();
+
+Repeat.init();
+Repeat.recountIndexRepeat();
+Repeat.showWord();
 
 Settings.init();
 locale.init();
