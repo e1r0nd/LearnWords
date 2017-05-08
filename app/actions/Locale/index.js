@@ -15,7 +15,7 @@ const locale = {
     const langSelect = document.querySelectorAll("[data-type=lang-select]");
 
     langNode.forEach((node) => {
-      node.innerText = this[this.currentlocale][node.dataset.lang];
+      node.innerText = this[this.currentLocale][node.dataset.lang];
     });
     langSelect.forEach((node) => {
       node.classList.remove("selected");
@@ -24,17 +24,17 @@ const locale = {
 
   langSelect(e) { // change localization
     e.preventDefault();
-    locale.currentlocale = this.dataset.lang;
+    locale.currentLocale = this.dataset.lang;
     // document.querySelector("#langSelect").click();
     // document.querySelector(".navbar-toggle:visible").click();
     locale.changelocaleContent();
-    cookies.key("language", locale.currentlocale);
+    cookies.key("language", locale.currentLocale);
     this.classList.add("selected");
   },
 
   init() {
     // Read user's locale or set English by default
-    this.currentlocale = cookies.key("language") || "en_GB";
+    this.currentLocale = cookies.key("language") || "en_GB";
     document
       .querySelectorAll("[data-type=lang-select]")
       .forEach((node) => {
@@ -42,8 +42,8 @@ const locale = {
       });
 
     // Set user saved locale
-    if (this.currentlocale !== document.querySelector("[data-type=lang-select].selected").dataset.lang) {
-      document.querySelector(`[data-lang=${this.currentlocale}]`).click();
+    if (this.currentLocale !== document.querySelector("[data-type=lang-select].selected").dataset.lang) {
+      document.querySelector(`[data-lang=${this.currentLocale}]`).click();
     }
   },
 };

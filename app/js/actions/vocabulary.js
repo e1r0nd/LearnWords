@@ -7,7 +7,7 @@
 import LWClass from '../utils/LW';
 const LW = new LWClass('LWdb');
 // import {Learn} from './learn';
-import {Repeat} from './repeat';
+// import {Repeat} from './repeat';
 
 import rowTemplate from '../../components/row-word/row-word.html';
 

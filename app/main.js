@@ -27,6 +27,10 @@ import RepeatClass from "./components/Repeat";
 const Repeat = new RepeatClass();
 Main.appendChild(Repeat.createBlock());
 
+import VocabularyClass from "./components/Vocabulary";
+const Vocabulary = new VocabularyClass();
+Main.appendChild(Vocabulary.createBlock());
+
 import SettingsClass from "./components/Settings";
 const Settings = new SettingsClass();
 Main.appendChild(Settings.createBlock());
@@ -41,10 +45,6 @@ if (storage.isOK && storage.isEmpty) {
   console.log("memorystore: words have been loaded");
 }
 
-import { Vocabulary } from "./js/actions/vocabulary";
-Vocabulary.init();
-Vocabulary.viewWord();
-
 /* Generate the Page */
 
 import { locale } from "./actions/Locale";
@@ -56,6 +56,8 @@ Main.appendChild(Footer);
 document.querySelector("body").appendChild(Main);
 
 // Init, add event listeners
+locale.init();
+
 Navigation.init();
 
 Learn.init();
@@ -66,5 +68,7 @@ Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
 
+Vocabulary.viewWord();
+Vocabulary.init();
+
 Settings.init();
-locale.init();

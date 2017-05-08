@@ -84,7 +84,7 @@ export default class LearnClass {
       this.learnWordsGrp.classList.remove("nodisplay");
       this.noWordsLeft.classList.add("nodisplay");
     } else {
-      this.allWordsOk.innerText = locale[locale.currentLocal].allWordsOk;
+      this.allWordsOk.innerText = locale[locale.currentLocale].allWordsOk;
       this.noWordsLeft.classList.remove("nodisplay");
       this.learnWordsGrp.classList.add("nodisplay");
     }
