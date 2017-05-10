@@ -37,7 +37,7 @@ Main.appendChild(Settings.createBlock());
 
 /* *** */
 
-import { Memorystore } from "./js/utils/memorystore";
+import { Memorystore } from "./actions/Memorystore";
 // load the default words set if needed
 if (storage.isOK && storage.isEmpty) {
   console.log("memorystore: start loading words");
