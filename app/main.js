@@ -10,6 +10,8 @@ import Storage from "browser-lsc-storage";
 const storage = Storage.local;
 storage.prefix = "LWdb";
 
+import { Words } from "./actions/Words";
+
 /* Create Main container for all components */
 const Main = document.createElement("div");
 Main.className = "container";
@@ -41,7 +43,7 @@ import { Memorystore } from "./actions/Memorystore";
 // load the default words set if needed
 if (storage.isOK && storage.isEmpty) {
   console.log("memorystore: start loading words");
-  storage.loadWords(Memorystore);
+  Words.loadWords(Memorystore);
   console.log("memorystore: words have been loaded");
 }
 
