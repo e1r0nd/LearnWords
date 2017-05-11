@@ -1,10 +1,16 @@
 import navigationTmp from "./Navigation.html";
 import "./Navigation.scss";
 
-export default class NavigationClass {
-  constructor() {
+const Navigation = {
+  init() {
     this.selected = "summary";
-  }
+    document
+      .querySelectorAll("[data-type=nav-select]")
+      .forEach((node) => {
+        node.addEventListener("click", this.navSelect.bind(this));
+      });
+    this.hashguard(false);
+  },
 
   createBlock() {
     const html = document.createElement("nav");
@@ -12,15 +18,7 @@ export default class NavigationClass {
     html.innerHTML = navigationTmp;
 
     return html;
-  }
-
-  init() {
-    document.querySelectorAll("[data-type=nav-select]").forEach((node) => {
-      node.addEventListener("click", this.navSelect.bind(this));
-    });
-
-    this.hashguard(false);
-  }
+  },
 
   hashguard(init) { // onHashChange
     if (init) {
@@ -31,7 +29,7 @@ export default class NavigationClass {
       this.hash = window.location.hash;
     }
     setTimeout(this.hashguard.bind(this), 300);
-  }
+  },
 
   hashbreak() { // hashchange event
     let node = null;
@@ -46,20 +44,25 @@ export default class NavigationClass {
     } else {
       document.querySelector("[data-target=summary]").click();
     }
-  }
+  },
 
   navSelect(e) {
     // Hide previous tab
     document
-      .querySelector(`#${this.selected}Nav`).classList.remove("active");
+      .querySelector(`#${this.selected}Nav`)
+      .classList.remove("active");
     document
-      .querySelector(`#${this.selected}`).classList.add("nodisplay");
-
+      .querySelector(`#${this.selected}`)
+      .classList.add("nodisplay");
     // Store current Tab and show it
     this.selected = e.currentTarget.dataset.target;
     document
-      .querySelector(`#${this.selected}Nav`).classList.add("active");
+      .querySelector(`#${this.selected}Nav`)
+      .classList.add("active");
     document
-      .querySelector(`#${this.selected}`).classList.remove("nodisplay");
-  }
-}
+      .querySelector(`#${this.selected}`)
+      .classList.remove("nodisplay");
+  },
+};
+
+export default Navigation;

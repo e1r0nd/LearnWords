@@ -8,11 +8,23 @@ const localStorage = storage.local;
 localStorage.prefix = "LWdb";
 import { locale } from "../../actions/Locale";
 
-export default class LearnClass {
-  constructor() {
+const Learn = {
+  init() {
     this.wordsLearn = [];
     this.currentIndex = 0;
-  }
+    this.learnWordsNum = document.querySelector("#learnWordsNum");
+    this.learnWordsTopNum = document.querySelector("#learnWordsTopNum");
+    this.learnWordsTopSNum = document.querySelector("#learnWordsTopSNum");
+    this.learnWord = document.querySelector("#learnWord");
+    this.translateWord = document.querySelector("#translateWord");
+    this.learnWordsGrp = document.querySelector("#learnWordsGrp");
+    this.noWordsLeft = document.querySelector("#noWordsLeft");
+    this.allWordsOk = document.querySelector("#allWordsOk");
+
+    document.querySelector("#rememberBtn").addEventListener("click", this.rememberWord.bind(this));
+    document.querySelector("#repeatBtn").addEventListener("click", this.repeatWord.bind(this));
+    document.querySelector("#knownBtn").addEventListener("click", this.knownWord.bind(this));
+  },
 
   createBlock() {
     const rememberBtn = button({
@@ -41,22 +53,7 @@ export default class LearnClass {
     html.innerHTML = learnTmp.replace(/{{buttons}}/g, buttons);
 
     return html;
-  }
-
-  init() {
-    this.learnWordsNum = document.querySelector("#learnWordsNum");
-    this.learnWordsTopNum = document.querySelector("#learnWordsTopNum");
-    this.learnWordsTopSNum = document.querySelector("#learnWordsTopSNum");
-    this.learnWord = document.querySelector("#learnWord");
-    this.translateWord = document.querySelector("#translateWord");
-    this.learnWordsGrp = document.querySelector("#learnWordsGrp");
-    this.noWordsLeft = document.querySelector("#noWordsLeft");
-    this.allWordsOk = document.querySelector("#allWordsOk");
-
-    document.querySelector("#rememberBtn").addEventListener("click", this.rememberWord.bind(this));
-    document.querySelector("#repeatBtn").addEventListener("click", this.repeatWord.bind(this));
-    document.querySelector("#knownBtn").addEventListener("click", this.knownWord.bind(this));
-  }
+  },
 
   recountIndexLearn() { // Count words to learn
     if (!this.wordsLearn.length) {
@@ -75,7 +72,7 @@ export default class LearnClass {
     this.learnWordsNum.innerText = wordsLearnLength || "0";
     // $(learnWordsTopNum).text(wordsLearnLength);
     // $(learnWordsTopSNum).text(wordsLearnLength);
-  }
+  },
 
   showWord() { // Show a next word to learn
     if (this.wordsLearn.length) {
@@ -88,7 +85,7 @@ export default class LearnClass {
       this.noWordsLeft.classList.remove("nodisplay");
       this.learnWordsGrp.classList.add("nodisplay");
     }
-  }
+  },
 
   actionWord(step, reindex) {
     if (step) {
@@ -120,17 +117,19 @@ export default class LearnClass {
       this.currentIndex = 0;
     }
     this.showWord();
-  }
+  },
 
   rememberWord() {
     this.actionWord(1, true);
-  }
+  },
 
   repeatWord() {
     this.actionWord(0);
-  }
+  },
 
   knownWord() {
     this.actionWord(4, true);
-  }
-}
+  },
+};
+
+export default Learn;

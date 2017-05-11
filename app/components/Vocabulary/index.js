@@ -6,22 +6,16 @@ import rowTemplate from "../row-word/row-word.html";
 import button from "../Button";
 // import input from "../Input";
 
-import { locale } from "../../actions/Locale";
+import locale from "../../actions/Locale";
 
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
 
-import RepeatClass from "../Repeat";
-const Repeat = new RepeatClass();
+import Repeat from "../Repeat";
+import Learn from "../Learn";
 
-export default class VocabularyClass {
-  constructor() {
-    this.rowTemplate = rowTemplate;
-    this.words = [];
-    this.translates = [];
-  }
-
+const Vocabulary = {
   createBlock() {
     const rememberBtn = button({
       "id": "rememberBtn",
@@ -38,11 +32,14 @@ export default class VocabularyClass {
     html.innerHTML = vocabularyTmp.replace(/{{buttons}}/g, buttons);
 
     return html;
-  }
+  },
 
   init() {
-    this.repeatWordsNum = document.querySelector("#repeatWordsNum");
+    this.rowTemplate = rowTemplate;
+    this.words = [];
+    this.translates = [];
 
+    this.repeatWordsNum = document.querySelector("#repeatWordsNum");
     this.totalWordsNum = document.querySelector("#totalWordsNum");
     this.vocabularyBox = document.querySelector("#vocabularyBox");
     this.errorVocabularyBox = document.querySelector("#errorVocabularyBox");
@@ -51,6 +48,8 @@ export default class VocabularyClass {
     this.inputTranslate = document.querySelector("#inputTranslate");
     this.addWordForm = document.querySelector("#addWordForm");
 
+    this.viewWord();
+
     document.querySelector("#addBtn").addEventListener("click", this.addSaveWord(true, this));
     document.querySelector(".js-edit-btn").addEventListener("click", () => {
       document.querySelector(`#${this.dataset.node}`).style.display = "none";
@@ -58,11 +57,11 @@ export default class VocabularyClass {
     });
     document.querySelector(".js-save-btn").addEventListener("click", this.addSaveWord);
     document.querySelector(".js-del-btn").addEventListener("click", this.removeWord);
-  }
+  },
 
   recountTotal() {
     document.querySelector("#totalWordsNum").innerText = localStorage.key("words").split(",").length;
-  }
+  },
 
   removeWord(notReindex) {
     // Remove word from vocabulary
@@ -78,8 +77,8 @@ export default class VocabularyClass {
     document.querySelector(`#${node}`).style.display = "none"; // $(`#${node}`).remove();
     document.querySelector(`#${node}Edit`).style.display = "none";// $(`#${node}Edit`).remove();
     this.recountTotal();
-    // Learn.wordsLearn = [];
-    // Learn.recountIndexLearn();
+    Learn.wordsLearn = [];
+    Learn.recountIndexLearn();
     Repeat.wordsRepeat = {
       currentIndexFirst: 0,
       first: [],
@@ -89,7 +88,7 @@ export default class VocabularyClass {
       third: [],
     };
     Repeat.recountIndexRepeat();
-  }
+  },
 
   viewWord() {
     let contentInner = "";
@@ -115,7 +114,7 @@ export default class VocabularyClass {
 
     document.querySelector("#vocabularyBox").innerHTML = contentInner;
     this.recountTotal();
-  }
+  },
 
   addSaveWord(addWord, self) {
     const wordTxt = (!addWord) ? document.querySelector(`#word-${this.dataset.node}`) : self.inputWordTxt;
@@ -176,11 +175,11 @@ export default class VocabularyClass {
       // LW.storeItem(`${LW.name}-words`, LW.index.join()); //add word to Vocabulary list
       this.clearFields();
       this.recountTotal();
-      // Learn.wordsLearn = [];
-      // Learn.recountIndexLearn();
-      // Learn.showWord();
+      Learn.wordsLearn = [];
+      Learn.recountIndexLearn();
+      Learn.showWord();
     }
-  }
+  },
 
   clearFields() {
     document.querySelectorAll(".form-group").forEach((node) => {
@@ -188,10 +187,13 @@ export default class VocabularyClass {
       node.classList.remove("has-error");
     });
     document.querySelector("#errorSettings").classList.add("nodisplay");
-  }
+  },
 
   setFieldError(self) { // Set the error style for the current input field
     self.classList.add("has-error");
+
     return true;
-  }
-}
+  },
+};
+
+export default Vocabulary;

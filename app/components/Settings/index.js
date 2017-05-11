@@ -8,11 +8,7 @@ const localStorage = storage.local;
 localStorage.prefix = "LWdb";
 import { locale } from "../../actions/Locale";
 
-export default class SettingsClass {
-  constructor() {
-    this.params = {};
-  }
-
+const Settings = {
   createBlock() {
     const firstCheck = input({
       "id": "inputFirstCheck",
@@ -46,9 +42,10 @@ export default class SettingsClass {
     html.innerHTML = settingsTmp.replace(/{{options}}/g, options);
 
     return html;
-  }
+  },
 
   init() {
+    this.params = {};
     this.inputFirstCheck = document.querySelector("#inputFirstCheck");
     this.inputSecondCheck = document.querySelector("#inputSecondCheck");
     this.inputThirdCheck = document.querySelector("#inputThirdCheck");
@@ -63,11 +60,11 @@ export default class SettingsClass {
     this.inputSecondCheck.value = settings.second;
     this.inputThirdCheck.value = settings.third;
 
-    this.params = settings; // store locale
-  }
+    this.params = settings; // Store locale
+  },
 
   saveSetting() {
-    // save setting"s values to DB
+    // Save setting's values to DB
     const first = this.inputFirstCheck.value.trim();
     const second = this.inputSecondCheck.value.trim();
     const third = this.inputThirdCheck.value.trim();
@@ -76,12 +73,11 @@ export default class SettingsClass {
       second,
       third,
     };
-    // const form = $(this.settingFrom);
     let errorName = "";
     let error = false;
 
     this.clearFields();
-    // check for empty fields
+    // Check for empty fields
     if (!first) {
       error = this.setFieldError(this.inputFirstCheck);
       errorName = "empty";
@@ -105,22 +101,22 @@ export default class SettingsClass {
         errorName = "number";
       }
     }
-    if (error) { // show error if any
+    if (error) { // Show error if any
       const errorTxt = ("empty" === errorName)
         ? locale[locale.currentlocale].errorEmpty
         : locale[locale.currentlocale].errorValid;
       this.errorSettings.classList.remove("nodisplay");
       this.errorSettings.innerText = errorTxt;
-    } else { // otherwise save new settings
+    } else { // Otherwise save new settings
       this.putSettings(settings);
       this.errorSettings.classList.remove("nodisplay");
       this.errorSettings.innerText = locale[locale.currentlocale].errorNo;
 
-      this.params = settings; // store locale
+      this.params = settings; // Store locale
     }
 
     return false;
-  }
+  },
 
   cancelSetting() {
     const settings = this.getSettings();
@@ -131,31 +127,33 @@ export default class SettingsClass {
     this.clearFields();
 
     return false;
-  }
+  },
 
   isNumber(str, withDot) {
-    // validate filed for number value
+    // Validate filed for number value
     const NumberReg = /^\d+$/;
     const NumberWithDotReg = /^[-+]?[0-9]*\.?[0-9]+$/;
 
     return withDot ? NumberWithDotReg.test(str) : NumberReg.test(str);
-  }
+  },
 
   clearFields() {
-    // clear all error styles
+    // Clear all error styles
     document.querySelectorAll(".form-group").forEach((node) => {
       node.classList.remove("has-error");
     });
     document.querySelector("#errorSettings").classList.add("nodisplay");
-  }
+  },
 
-  setFieldError(self) { // set the error style for the current input field
+  setFieldError(self) {
+    // Set the error style for the current input field
     self.classList.add("has-error");
+
     return true;
-  }
+  },
 
   getSettings() {
-    // read settings values
+    // Read settings values
     let settings = localStorage.key("settings");
     if (!settings) {
       console.log("initialize settings");
@@ -169,9 +167,11 @@ export default class SettingsClass {
     }
 
     return settings;
-  }
+  },
 
   putSettings(theSettingsObj) {
     localStorage.key("settings", theSettingsObj);
-  }
-}
+  },
+};
+
+export default Settings;

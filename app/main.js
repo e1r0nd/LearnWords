@@ -10,36 +10,32 @@ import Storage from "browser-lsc-storage";
 const storage = Storage.local;
 storage.prefix = "LWdb";
 
-import { Words } from "./actions/Words";
+import Words from "./actions/Words";
 
 /* Create Main container for all components */
 const Main = document.createElement("div");
 Main.className = "container";
 
 /* Import all components and inject into Main container */
-import NavigationClass from "./components/Navigation";
-const Navigation = new NavigationClass();
+import Navigation from "./components/Navigation";
 Main.appendChild(Navigation.createBlock());
 
-import LearnClass from "./components/Learn";
-const Learn = new LearnClass();
+import Summary from "./components/Summary";
+Main.appendChild(Summary.createBlock());
+
+import Learn from "./components/Learn";
 Main.appendChild(Learn.createBlock());
 
-import RepeatClass from "./components/Repeat";
-const Repeat = new RepeatClass();
+import Repeat from "./components/Repeat";
 Main.appendChild(Repeat.createBlock());
 
-import VocabularyClass from "./components/Vocabulary";
-const Vocabulary = new VocabularyClass();
+import Vocabulary from "./components/Vocabulary";
 Main.appendChild(Vocabulary.createBlock());
 
-import SettingsClass from "./components/Settings";
-const Settings = new SettingsClass();
+import Settings from "./components/Settings";
 Main.appendChild(Settings.createBlock());
 
-/* *** */
-
-import { Memorystore } from "./actions/Memorystore";
+import Memorystore from "./actions/Memorystore";
 // load the default words set if needed
 if (storage.isOK && storage.isEmpty) {
   console.log("memorystore: start loading words");
@@ -48,8 +44,7 @@ if (storage.isOK && storage.isEmpty) {
 }
 
 /* Generate the Page */
-
-import { locale } from "./actions/Locale";
+import locale from "./actions/Locale";
 
 import Footer from "./components/Footer";
 Main.appendChild(Footer);
@@ -70,7 +65,6 @@ Repeat.init();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
 
-Vocabulary.viewWord();
 Vocabulary.init();
 
 Settings.init();

@@ -6,18 +6,11 @@ import button from "../Button";
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
-import SettingsClass from "../Settings";
-const Settings = new SettingsClass();
 
-export default class RepeatClass {
-  constructor() {
-    this.wordsRepeat = {
-      first: [],
-      second: [],
-      third: [],
-    };
-  }
+import { Settings } from "../Settings";
+import { Learn } from "../Learn";
 
+const Repeat = {
   createBlock() {
     const rememberBtn = button({
       "id": "rememberBtn",
@@ -34,9 +27,14 @@ export default class RepeatClass {
     html.innerHTML = repeatTmp.replace(/{{buttons}}/g, buttons);
 
     return html;
-  }
+  },
 
   init() {
+    this.wordsRepeat = {
+      first: [],
+      second: [],
+      third: [],
+    };
     this.repeatWordsNum = document.querySelector("#repeatWordsNum");
     this.repeatWordsTopNum = document.querySelector("#repeatWordsTopNum");
     this.repeatWordsTopSNum = document.querySelector("#repeatWordsTopSNum");
@@ -51,12 +49,12 @@ export default class RepeatClass {
       this.checkThisWord(this);
     });
     document.querySelector("#enterBtn").addEventListener("click", this.repeatWord.bind(this));
-  }
+  },
 
   getToday() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
-  }
+  },
 
   recountIndexRepeat() {
     // Count words to Repeat
@@ -82,9 +80,7 @@ export default class RepeatClass {
       + this.wordsRepeat.third.length;
 
     this.repeatWordsNum.innerText = wordsRepeatTotal || "0";
-    // $(repeatWordsTopNum).text(wordsRepeatLength);
-    // $(repeatWordsTopSNum).text(wordsRepeatLength);
-  }
+  },
 
   showWord() { // Show a next word to Repeat
     let wordPlaceholder = "";
@@ -143,7 +139,7 @@ export default class RepeatClass {
       this.enterWord.classList.add("nodisplay");
       this.noWordsRepeat.classList.remove("nodisplay");
     }
-  }
+  },
 
   actionWord(step, reindex, word = "") {
     if (step) {
@@ -163,7 +159,7 @@ export default class RepeatClass {
       this.currentIndex = 0;
     }
     this.showWord(this.currentIndex);
-  }
+  },
 
   checkThisWord(self) {
     const word = {
@@ -182,12 +178,12 @@ export default class RepeatClass {
     }
     localStorage.key(word.index, word); // Save word
     this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"].splice(0, 1); // Remove from index
-    // Learn.wordsLearn = [];
-    // Learn.recountIndexLearn();
-    // Learn.showWord();
+    Learn.wordsLearn = [];
+    Learn.recountIndexLearn();
+    Learn.showWord();
     this.recountIndexRepeat();
     this.showWord();
-  }
+  },
 
   repeatWord() {
     const word = {
@@ -205,16 +201,16 @@ export default class RepeatClass {
     }
     localStorage.key(word.index, word); // Save word
     this.wordsRepeat.third.splice(0, 1); // Remove from index
-    // Learn.wordsLearn = [];
-    // Learn.recountIndexLearn();
-    // Learn.showWord();
+    Learn.wordsLearn = [];
+    Learn.recountIndexLearn();
+    Learn.showWord();
     this.recountIndexRepeat();
     this.showWord();
-  }
+  },
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  },
 
   shuffle(a) {
     let j;
@@ -226,5 +222,7 @@ export default class RepeatClass {
       a[i - 1] = a[j];
       a[j] = x;
     }
-  }
-}
+  },
+};
+
+export default Repeat;

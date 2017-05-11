@@ -2,12 +2,13 @@ import Storage from "browser-lsc-storage";
 const storage = Storage.local;
 storage.prefix = "LWdb";
 
-export const Words = {
+const Words = {
   loadWords(theWords) {
     let i = 0;
     const arrayOfKeys = [];
     const storeEachElement = (element) => {
-      element.index = `index${ ++i }`;
+      i = i + 1;
+      element.index = `index${i}`;
       element.step = element.date = 0;
       storage.key(element.index, element);
       arrayOfKeys.push(element.index);
@@ -80,3 +81,5 @@ export const Words = {
     this.removeObjects(aKeyPrefix);
   },
 };
+
+export default Words;

@@ -1,4 +1,4 @@
-export const Memorystore = [
+const Memorystore = [
   {
     "index": "index1",
     "word": "das Auto",
@@ -94,3 +94,5 @@ export const Memorystore = [
     "date": 0,
   },
 ];
+
+export default Memorystore;
