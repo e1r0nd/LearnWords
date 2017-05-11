@@ -3,8 +3,7 @@
  * @copyright Anatol Marezhanyi 2017
  * @version 2.0.0-aplha
  */
-import "./css/styles.scss";
-import "jquery";
+import "./styles/styles.scss";
 
 import Storage from "browser-lsc-storage";
 const storage = Storage.local;
