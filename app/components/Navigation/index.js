@@ -9,7 +9,11 @@ const Navigation = {
       .forEach((node) => {
         node.addEventListener("click", this.navSelect.bind(this));
       });
-    this.hashguard(false);
+    if ("onhashchange" in window) {
+      window.onhashchange = this.hashbreak;
+    } else {
+      this.hashguard(false);
+    }
   },
 
   createBlock() {
