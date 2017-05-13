@@ -1,8 +1,18 @@
-$gray: #e5e5e5;
+$footer-backgound: #edeff1;;
+$footer-text-color: #bac1c8;
+$footer-link-color: #9aa4af;
 
 .footer {
-  border-top: 1px solid $gray;
-  display: flex;
+  background-color: $footer-backgound;
+  color: $footer-text-color;
+  font-size: 15px;
   margin-top: 45px;
-  padding: 0 0 36px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+
+  &__lnk {
+    color: $footer-link-color;
+    font-weight: 700;
+  }
 }

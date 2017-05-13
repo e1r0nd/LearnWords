@@ -13,7 +13,7 @@ import Words from "./actions/Words";
 
 /* Create Main container for all components */
 const Main = document.createElement("div");
-Main.className = "container";
+// Main.className = "container";
 
 /* Import all components and inject into Main container */
 import Navigation from "./components/Navigation";
@@ -36,7 +36,7 @@ Main.appendChild(Settings.createBlock());
 
 import Memorystore from "./actions/Memorystore";
 // load the default words set if needed
-if (storage.isOK && storage.isEmpty) {
+if (0 === storage.length) {
   console.log("memorystore: start loading words");
   Words.loadWords(Memorystore);
   console.log("memorystore: words have been loaded");

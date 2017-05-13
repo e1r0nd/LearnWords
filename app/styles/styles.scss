@@ -1,4 +1,37 @@
-// @import url( '~bootstrap/dist/css/bootstrap.min.css');
+$body-background: #fff;
+$text-color: #34495e;
+$link-color: #16a085;
+
+body {
+  background-color: $body-background;
+  color: $text-color;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.72222;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 970px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (max-width: 425px) {
+    max-width: 420px;
+  }
+  @media (min-width: 426px) and (max-width: 768px) {
+    max-width: 760px;
+  }
+}
 
 .content {
   text-align: justify;
@@ -19,11 +52,15 @@
 .form-group-right {
   text-align: right;
 }
-@media (min-width: 768px) and (max-width: 992px) {
+
+@media (max-width: 425px) {
   // empty
 }
-@media (max-width: 768px) {
+@media (min-width: 426px) and (max-width: 768px) {
   .add-btn {
     width: 50%;
   }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+  // empty
 }

@@ -16,7 +16,7 @@ const Words = {
 
     theWords.forEach(storeEachElement.bind(this));
 
-    storage.key(`${storage.prefix}-words`, arrayOfKeys.join());
+    storage.key("words", arrayOfKeys.join());
     this.index = arrayOfKeys;
 
     console.log(`${arrayOfKeys.length} words have been loaded`);
@@ -70,9 +70,9 @@ const Words = {
 
     this.removeObjects(aKeyPrefix);
     // reset index
-    storage.key(`${storage.prefix}-words`, "");
+    storage.key("words", "");
     // this one triggers that memorystore is executed
-    storage.remove(`${storage.prefix}-settings`);
+    storage.remove("settings");
   },
 
   destroy() {
