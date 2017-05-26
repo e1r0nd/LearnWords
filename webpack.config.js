@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+// const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const rimraf = require("rimraf");
 
 function addHash(template, hash) {
@@ -71,7 +71,6 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         use: "babel-loader?presets[]=es2015",
       },
       {
@@ -98,16 +97,18 @@ module.exports = {
 };
 
 if ("production" === NODE_ENV) {
-  module.exports.plugins.push(
-    new UglifyJSPlugin({
+  module.exports.devtool = false;
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
+        pure_funcs: ["console.log", "window.console.log.apply"]
       },
       output: {
         comments: false,
       },
-    })
-  );
+    }),
+  ]);
   module.exports.plugins.push(
     {
       apply: (compiler) => {
