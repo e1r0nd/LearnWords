@@ -11,11 +11,6 @@ const Navigation = {
       .forEach((node) => {
         node.addEventListener("click", this.navSelect.bind(this));
       });
-    if ("onhashchange" in window) {
-      window.onhashchange = this.hashbreak;
-    } else {
-      this.hashguard(false);
-    }
 
     this.navTitle = document.querySelector("#sideNavTitle");
     this.showButtonEl = document.querySelector("#menuShow");
@@ -44,6 +39,13 @@ const Navigation = {
     this.addEventListeners();
 
     this.navTitle.innerHTML = "Summary";
+
+    if ("onhashchange" in window) {
+      window.onhashchange = this.hashbreak;
+      this.hashbreak();
+    } else {
+      this.hashguard(false);
+    }
   },
 
   createBlock() {
@@ -87,7 +89,7 @@ const Navigation = {
       .classList.remove("active");
     document
       .querySelector(`#${this.selected}`)
-      .classList.add("nodisplay");
+      .classList.add("u--nodisplay");
     // Store current Tab and show it
     this.selected = e.currentTarget.dataset.target;
     document
@@ -95,7 +97,7 @@ const Navigation = {
       .classList.add("active");
     document
       .querySelector(`#${this.selected}`)
-      .classList.remove("nodisplay");
+      .classList.remove("u--nodisplay");
     // Change Title and hide Nav
     this.navTitle.innerHTML = this.selected.charAt(0).toUpperCase() + this.selected.slice(1);
     this.hideSideNav();
