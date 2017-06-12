@@ -1,4 +1,39 @@
-//
+$primary-color: #FFFFFF;
+$primary-background: #1ABC9C;
+$primary-hover-background: rgba(26, 188, 156, 0.7);
+$default-color: #FFFFFF;
+$default-background: #BDC3C7;
+$default-hover-background: rgba(168, 174, 177, 0.5);
+
+.btn {
+  border: none;
+  padding: 10px 19px;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.471;
+  border-radius: 6px;
+  white-space: normal;
+  cursor: pointer;
+  transition: background-color 0.25s linear;
+}
+
+.btn-default {
+    color: $default-color;
+    background-color: $default-background;
+
+    &:hover {
+      background-color: $default-hover-background;
+    }
+}
+
+.btn-primary {
+    color: $primary-color;
+    background-color: $primary-background;
+
+    &:hover {
+      background-color: $primary-hover-background;
+    }
+}
 
 @media (min-width: 768px) and (max-width: 992px) {
   //
