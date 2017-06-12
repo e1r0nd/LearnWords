@@ -5,7 +5,7 @@ const Summary = {
   createBlock() {
     const html = document.createElement("div");
     html.id = "summary";
-    html.classList.add("center");
+    html.classList.add("u--center");
     html.dataset.toggle = "nav";
     html.innerHTML = summaryTmp;
 
