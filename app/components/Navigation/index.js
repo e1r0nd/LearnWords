@@ -178,9 +178,11 @@ const Navigation = {
     evt.stopPropagation();
   },
 
-  onTransitionEnd() {
-    this.sideNavEl.classList.remove("side-nav--animatable");
-    this.sideNavEl.removeEventListener("transitionend", this.onTransitionEnd);
+  onTransitionEnd(e) {
+    if ("transform" === e.propertyName) {
+      this.sideNavEl.classList.remove("side-nav--animatable");
+      this.sideNavEl.removeEventListener("transitionend", this.onTransitionEnd);
+    }
   },
 
   showSideNav() {
