@@ -22,7 +22,7 @@ const Repeat = {
     const buttons = rememberBtn;
     const html = document.createElement("div");
     html.id = "repeat";
-    html.classList.add("center", "nodisplay");
+    html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
     html.innerHTML = repeatTmp.replace(/{{buttons}}/g, buttons);
 
