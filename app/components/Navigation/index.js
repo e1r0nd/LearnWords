@@ -2,6 +2,7 @@ import navigationTmp from "./Navigation.html";
 import "./Navigation.scss";
 
 import Detabinator from "./detabinator";
+import locale from "../../actions/Locale";
 
 const Navigation = {
   init() {
@@ -37,8 +38,6 @@ const Navigation = {
 
     this.supportsPassive = null;
     this.addEventListeners();
-
-    this.navTitle.innerHTML = "Summary";
 
     if ("onhashchange" in window) {
       window.onhashchange = this.hashbreak;
@@ -99,7 +98,8 @@ const Navigation = {
       .querySelector(`#${this.selected}`)
       .classList.remove("u--nodisplay");
     // Change Title and hide Nav
-    this.navTitle.innerHTML = this.selected.charAt(0).toUpperCase() + this.selected.slice(1);
+    this.navTitle.dataset.lang = this.selected;
+    this.navTitle.innerHTML = locale.getWord(this.selected);
     this.hideSideNav();
   },
 

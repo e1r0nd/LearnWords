@@ -9,6 +9,7 @@ const locale = {
   en_GB: enGB,
   de_DE: deDE,
   ru_RU: ruRU,
+
   changelocaleContent() {
     // Change inner content
     const langNode = document.querySelectorAll("[data-toggle=lang]");
@@ -25,11 +26,13 @@ const locale = {
   langSelect(e) { // change localization
     e.preventDefault();
     locale.currentLocale = this.dataset.lang;
-    // document.querySelector("#langSelect").click();
-    // document.querySelector(".navbar-toggle:visible").click();
     locale.changelocaleContent();
     cookies.key("language", locale.currentLocale);
     this.classList.add("selected");
+  },
+
+  getWord(word) {
+    return this[this.currentLocale][word];
   },
 
   init() {

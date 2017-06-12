@@ -6,7 +6,7 @@ import button from "../Button";
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
-import { locale } from "../../actions/Locale";
+import locale from "../../actions/Locale";
 
 const Learn = {
   init() {
