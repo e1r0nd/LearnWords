@@ -48,7 +48,7 @@ const Learn = {
     const buttons = rememberBtn + repeatBtn + knownBtn;
     const html = document.createElement("div");
     html.id = "learn";
-    html.classList.add("center", "nodisplay");
+    html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
     html.innerHTML = learnTmp.replace(/{{buttons}}/g, buttons);
 
