@@ -13,7 +13,7 @@ import Words from "./actions/Words";
 
 /* Create Main container for all components */
 const Main = document.createElement("div");
-// Main.className = "container";
+Main.className = "container--main";
 
 /* Import all components and inject into Main container */
 import Navigation from "./components/Navigation";

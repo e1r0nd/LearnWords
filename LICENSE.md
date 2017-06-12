@@ -25,3 +25,6 @@ SOFTWARE.
 
 - Some original Bootstrap code and documentation http://getbootstrap.com
 `Copyright (c) 2011-2015, Twitter Inc.`
+
+- Side Nav code https://github.com/GoogleChrome/ui-element-samples
+`Copyright (c) 2015 Google, Inc.`

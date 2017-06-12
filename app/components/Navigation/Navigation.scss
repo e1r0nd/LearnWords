@@ -1,3 +1,144 @@
+$header-background: #34495E;
+$header-shadow: rgba(0,0,0,0.4);
+$header-hero-background: #1ABC9C;
+$title-color: #FFF;
+$link-hover-background: #ECF0F1;
+$curve-transition: cubic-bezier(0,0,0.3,1);
+
+.header {
+  width: 100%;
+  height: 56px;
+  box-shadow: 0 2px 4px $header-shadow;
+  background: $header-background;
+  color: $title-color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.header__menu-toggle {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  color: $title-color;
+}
+
+.side-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.side-nav--visible {
+  pointer-events: auto;
+}
+
+.side-nav::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: $header-shadow;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.3s $curve-transition;
+}
+
+.side-nav__container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  background: $title-color;
+  height: 100%;
+  box-shadow: 2px 0 12px $header-shadow;
+  transform: translateX(-102%);
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.side-nav--animatable .side-nav__container {
+  transition: transform 0.13s $curve-transition;
+}
+
+.side-nav--visible.side-nav--animatable .side-nav__container {
+  transition: transform 0.33s $curve-transition;
+}
+
+.side-nav--visible::before {
+  opacity: 1;
+}
+
+.side-nav--visible .side-nav__container {
+  transform: none;
+}
+
+.side-nav__hide {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  background: none;
+  border: none;
+  color: $title-color;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav__header {
+  height: 200px;
+  background: $header-hero-background;
+  color: $title-color;
+  display: flex;
+  padding: 16px;
+  align-items: flex-end;
+}
+
+.side-nav__title {
+  color: $title-color;
+  font-size: 24px;
+  padding-left: 24px;
+}
+
+.side-nav__content {
+  padding-top: 32px;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.side-nav__content .side-nav__lnk {
+  display: block;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 16px;
+}
+
+.side-nav__content .side-nav__lnk:hover,
+.side-nav__content .side-nav__lnk:focus {
+  background: $link-hover-background;
+}
+
+
 .active,
 .selected {
   font-weight: bold;

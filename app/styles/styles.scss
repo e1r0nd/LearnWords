@@ -1,11 +1,16 @@
-$body-background: #fff;
+$body-background: #ECF0F1;
+$content-background: #fff;
 $text-color: #34495e;
 $link-color: #16a085;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   background-color: $body-background;
   color: $text-color;
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 1.72222;
   margin: 0;
@@ -33,8 +38,21 @@ a {
   }
 }
 
+.container--main {
+  background-color: #FFF;
+  padding-top: 60px;
+}
+
 .content {
   text-align: justify;
+}
+
+.num-words {
+  font-weight: normal;
+}
+
+.form-group-right {
+  text-align: right;
 }
 
 .nodisplay {
@@ -45,12 +63,8 @@ a {
   text-align: center;
 }
 
-.num-words {
-  font-weight: normal;
-}
-
-.form-group-right {
-  text-align: right;
+.u--pointer {
+  cursor: pointer;
 }
 
 @media (max-width: 425px) {
