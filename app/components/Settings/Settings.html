@@ -1,15 +1,13 @@
-<div class="row">
-  <div class="col-md-12">
-    <form role="form" id="settingForm" action="#">
-      <ul class="dropdown-menu">
-        <li><a data-type="lang-select" data-lang="en_GB" class="selected" href="#">English</a></li>
-        <li><a data-type="lang-select" data-lang="de_DE" class="" href="#">Deutsch</a></li>
-        <li><a data-type="lang-select" data-lang="ru_RU" class="" href="#">Русский</a></li>
-      </ul>
-      {{options}}
-      <div id="errorSettings" class="alert alert-warning nodisplay"></div>
-      <button id="saveSettings" type="submit" class="btn btn-primary btn-lg" data-lang="saveBtn" data-toggle="lang">Save</button>
-      <button id="cancelSettings" type="submit" class="btn btn-default btn-lg" data-lang="cancelBtn" data-toggle="lang">Cancel</button>
-    </form>
-  </div>
+<div class="u--center">
+  <form role="form" id="settingForm" action="#">
+    <ul class="dropdown-menu">
+      <li><a data-type="lang-select" data-lang="en_GB" class="selected" href="#">English</a></li>
+      <li><a data-type="lang-select" data-lang="de_DE" class="" href="#">Deutsch</a></li>
+      <li><a data-type="lang-select" data-lang="ru_RU" class="" href="#">Русский</a></li>
+    </ul>
+    {{options}}
+    <div id="errorSettings" class="alert alert-warning u--nodisplay"></div>
+    <button id="saveSettings" type="submit" class="btn btn-primary" data-lang="saveBtn" data-toggle="lang">Save</button>
+    <button id="cancelSettings" type="submit" class="btn btn-default" data-lang="cancelBtn" data-toggle="lang">Cancel</button>
+  </form>
 </div>

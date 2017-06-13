@@ -37,7 +37,7 @@ const Settings = {
     const options = firstCheck + secondCheck + thirdCheck;
     const html = document.createElement("div");
     html.id = "settings";
-    html.classList.add("center", "nodisplay");
+    html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
     html.innerHTML = settingsTmp.replace(/{{options}}/g, options);
 

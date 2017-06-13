@@ -4,6 +4,9 @@ $primary-hover-background: rgba(26, 188, 156, 0.7);
 $default-color: #FFFFFF;
 $default-background: #BDC3C7;
 $default-hover-background: rgba(168, 174, 177, 0.5);
+$info-color: #FFFFFF;
+$info-background: #3498DB;
+$info-hover-background: rgba(52, 152, 219, 0.6);
 
 .btn {
   border: none;
@@ -32,6 +35,15 @@ $default-hover-background: rgba(168, 174, 177, 0.5);
 
     &:hover {
       background-color: $primary-hover-background;
+    }
+}
+
+.btn-info {
+    color: $info-color;
+    background-color: $info-background;
+
+    &:hover {
+      background-color: $info-hover-background;
     }
 }
 

@@ -1,21 +1,21 @@
-<div id="{{node}}" class="row">
-  <div class="col-md-5 col-sm-5 col-xs-4">{{txt}}</div>
-  <div class="col-md-5 col-sm-5 col-xs-4">{{translate}}</div>
-  <div class="col-md-2 col-sm-2 col-xs-4">
+<div id="{{node}}" class="">
+  <div class="">{{txt}}</div>
+  <div class="">{{translate}}</div>
+  <div class="">
     <button data-node="{{node}}" type="button" class="btn btn-info js-edit-btn">
       <span class="glyphicon glyphicon-edit"></span>
     </button>
   </div>
 </div>
-<div id="{{node}}Edit" class="row nodisplay">
+<div id="{{node}}Edit" class="row u--nodisplay">
   <form id="form-{{node}}" role="form">
-    <div class="col-md-5 col-sm-5 col-xs-4">
+    <div class="">
       <input type="text" class="form-control inp-fld" id="word-{{node}}" placeholder="Enter word" value="{{txt}}">
     </div>
-    <div class="col-md-5 col-sm-5 col-xs-4">
+    <div class="">
       <input type="text" class="form-control inp-fld" id="translate-{{node}}" placeholder="Enter translate" value="{{translate}}">
     </div>
-    <div class="col-md-2 col-sm-2 col-xs-4">
+    <div class="">
       <button data-node="{{node}}" type="button" class="btn btn-success js-save-btn">
         <span class="glyphicon glyphicon-ok">
         </span>

@@ -27,7 +27,7 @@ const Vocabulary = {
     const buttons = rememberBtn;
     const html = document.createElement("div");
     html.id = "vocabulary";
-    html.classList.add("center", "nodisplay");
+    html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
     html.innerHTML = vocabularyTmp.replace(/{{buttons}}/g, buttons);
 
