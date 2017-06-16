@@ -8,8 +8,8 @@ import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
 
-import { Settings } from "../Settings";
-import { Learn } from "../Learn";
+import Settings from "../Settings";
+import Learn from "../Learn";
 
 const Repeat = {
   createBlock() {
