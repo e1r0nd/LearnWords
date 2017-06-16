@@ -6,15 +6,16 @@ const Words = {
   loadWords(theWords) {
     let i = 0;
     const arrayOfKeys = [];
-    const storeEachElement = (element) => {
-      i = i + 1;
-      element.index = `index${i}`;
-      element.step = element.date = 0;
+    // const storeEachElement = ;
+
+    theWords.forEach((element, i) => {
+      // i = i + 1;
+      element.index = `index${i + 1}`;
+      // element.step =
+      element.date = 0;
       storage.key(element.index, element);
       arrayOfKeys.push(element.index);
-    };
-
-    theWords.forEach(storeEachElement.bind(this));
+    });
 
     storage.key("words", arrayOfKeys.join());
     this.index = arrayOfKeys;

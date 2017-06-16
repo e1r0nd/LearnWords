@@ -2,6 +2,7 @@ import repeatTmp from "./Repeat.html";
 import "./Repeat.scss";
 
 import button from "../Button";
+import input from "../Input";
 
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
@@ -12,19 +13,27 @@ import { Learn } from "../Learn";
 
 const Repeat = {
   createBlock() {
-    const rememberBtn = button({
-      "id": "rememberBtn",
-      "label": "Remember",
+    const enterBtn = button({
+      "id": "enterBtn",
+      "label": "Check",
       "class": "btn btn-primary",
-      "dataLang": "rememberBtn",
+      "dataLang": "enterBtn",
+    });
+    const enterInp = input({
+      "id": "inputWord",
+      "label": "word:",
+      "placeholder": "Enter word",
     });
 
-    const buttons = rememberBtn;
+    const buttons = enterBtn;
+    const inputs = enterInp;
     const html = document.createElement("div");
     html.id = "repeat";
     html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
-    html.innerHTML = repeatTmp.replace(/{{buttons}}/g, buttons);
+    html.innerHTML = repeatTmp
+      .replace(/{{buttons}}/g, buttons)
+      .replace(/{{inputs}}/g, inputs);
 
     return html;
   },
@@ -40,10 +49,16 @@ const Repeat = {
     this.repeatWordsTopSNum = document.querySelector("#repeatWordsTopSNum");
     this.checkWord = document.querySelector("#checkWord");
     this.checkWordInp = document.querySelector("#checkWordInp");
+    this.enterWordInp = document.querySelector("#enterWordInp");
     this.enterWord = document.querySelector("#enterWord");
     this.inputWord = document.querySelector("#inputWord");
     this.noWordsRepeat = document.querySelector("#noWordsRepeat");
     this.enterBtn = document.querySelector("#enterBtn");
+    this.arrOptionButtons = document.querySelectorAll("[data-type=checkWordBtn]");
+    this.Vocabulary = {
+      translates: [],
+      words: [],
+    };
 
     document.querySelector("[data-type=checkWordBtn]").addEventListener("click", () => {
       this.checkThisWord(this);
@@ -63,15 +78,17 @@ const Repeat = {
       index.forEach((node) => { // Initial counting
         const item = localStorage.key(node);
         if (item && (this.getToday() > item.date)) { // If this word is for today
-          if (1 === item.step) {
+          if ("1" === item.step) {
             this.wordsRepeat.first.push(item);
-          } else if (2 === item.step) {
+          } else if ("2" === item.step) {
             this.wordsRepeat.second.push(item);
           }
-          if (3 === item.step) {
+          if ("3" === item.step) {
             this.wordsRepeat.third.push(item);
           }
         }
+        this.Vocabulary.translates.push(item.translate);
+        this.Vocabulary.words.push(item.word);
       });
     }
     const wordsRepeatTotal =
@@ -93,51 +110,50 @@ const Repeat = {
             (this.wordsRepeat.first.length) ? "first" : "second"][0][
               (this.wordsRepeat.first.length) ? "translate" : "word"];
       } else {
-        /* wordPlaceholder = Vocabulary[
+        wordPlaceholder = this.Vocabulary[
           (this.wordsRepeat.first.length)
           ? "translates"
-          : "words"][this.getRandomInt(0, Vocabulary[
+          : "words"][this.getRandomInt(0, this.Vocabulary[
             (this.wordsRepeat.first.length) ? "translates" : "words"
           ].length - 1)
-        ]; */
+        ];
       }
 
       if (arrWords.includes(wordPlaceholder)) {
-        getWord(index, arrWords);
+        getWord.apply(this, index, arrWords);
       }
 
       return wordPlaceholder;
     }
 
     if (this.wordsRepeat.first.length || this.wordsRepeat.second.length) {
-      const id = this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"][0].index;
+      // const id = this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"][0].index;
       const arrWords = [];
       this.checkWordInp.innerText = (this.wordsRepeat[(this.wordsRepeat.first.length)
         ? "first"
-        : "second"][0][(this.wordsRepeat.first.length) ? "word" : "translate"]).data("id", id);
+        : "second"][0][(this.wordsRepeat.first.length) ? "word" : "translate"]); // .data("id", id);
 
-      const arrOptionButtons = document.querySelector("[data-type=checkWordBtn]");
       // The answer buttons are shuffled so that we don"t know which one is the correct word.
-      this.shuffle(arrOptionButtons);
+      this.shuffle(this.arrOptionButtons);
 
       this.arrOptionButtons.forEach((node, index) => {
-        wordPlaceholder = getWord(index, arrWords);
+        wordPlaceholder = getWord.call(this, index, arrWords);
         arrWords[index] = wordPlaceholder;
         node.innerText = wordPlaceholder;
       });
       this.enterBtn.dataset.direction = true;
-      this.checkWord.classList.remove("nodisplay");
-      this.enterWord.classList.add("nodisplay");
-      this.noWordsRepeat.classList.add("nodisplay");
+      this.checkWord.classList.remove("u--u--nodisplay");
+      this.enterWord.classList.add("u--nodisplay");
+      this.noWordsRepeat.classList.add("u--nodisplay");
     } else if (this.wordsRepeat.third.length) {
       this.enterWordInp.innerText = this.wordsRepeat.third[0].translate;
-      this.checkWord.classList.add("nodisplay");
-      this.enterWord.classList.remove("nodisplay");
-      this.noWordsRepeat.classList.add("nodisplay");
+      this.checkWord.classList.add("u--nodisplay");
+      this.enterWord.classList.remove("u--nodisplay");
+      this.noWordsRepeat.classList.add("u--nodisplay");
     } else {
-      this.checkWord.classList.add("nodisplay");
-      this.enterWord.classList.add("nodisplay");
-      this.noWordsRepeat.classList.remove("nodisplay");
+      this.checkWord.classList.add("u--nodisplay");
+      this.enterWord.classList.add("u--nodisplay");
+      this.noWordsRepeat.classList.remove("u--nodisplay");
     }
   },
 
@@ -170,10 +186,10 @@ const Repeat = {
     };
 
     if (self.innerText === ((this.wordsRepeat.first.length) ? word.translate : word.word)) {
-      word.step = word.step + 1;
+      word.step = (+word.step + 1).toString();
       word.date = this.getToday() + 864000000 * Settings.params[(this.wordsRepeat.first.length) ? "second" : "third"];
     } else {
-      word.step = word.step - 1;
+      word.step = (+word.step - 1).toString();
       word.date = (this.wordsRepeat.first.length) ? 0 : this.getToday() + 864000000 * Settings.params.first;
     }
     localStorage.key(word.index, word); // Save word
@@ -193,10 +209,10 @@ const Repeat = {
       step: this.wordsRepeat.third[0].step,
     };
     if (this.enterWordInp.value === word.word) {
-      word.step = word.step + 1;
+      word.step = (+word.step + 1).toString();
       word.date = 0;
     } else {
-      word.step = word.step - 1;
+      word.step = (+word.step - 1).toString();
       word.date = this.getToday() + 864000000 * Settings.params.second;
     }
     localStorage.key(word.index, word); // Save word

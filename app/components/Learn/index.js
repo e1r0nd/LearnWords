@@ -60,7 +60,7 @@ const Learn = {
       const index = localStorage.key("words").split(",");
       index.forEach((node) => { // The initial counting
         const item = localStorage.key(node);
-        if (item && 0 === item.step) {
+        if (item && "0" === item.step) {
           this.wordsLearn.push(item);
         }
       });
@@ -98,7 +98,7 @@ const Learn = {
         word: this.wordsLearn[this.currentIndex].word,
         translate: this.wordsLearn[this.currentIndex].translate,
         step,
-        date: (1 === step) ? (getToday() + 864000000 * 1/* Settings.params.first*/) : 0,
+        date: ("1" === step) ? (getToday() + 864000000 * 1/* Settings.params.first*/) : 0,
       };
 
       localStorage.key(this.wordsLearn[this.currentIndex].index, word); // Save word
@@ -120,15 +120,15 @@ const Learn = {
   },
 
   rememberWord() {
-    this.actionWord(1, true);
+    this.actionWord("1", true);
   },
 
   repeatWord() {
-    this.actionWord(0);
+    this.actionWord("0");
   },
 
   knownWord() {
-    this.actionWord(4, true);
+    this.actionWord("4", true);
   },
 };
 
