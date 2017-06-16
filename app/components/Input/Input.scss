@@ -1,8 +1,10 @@
-$borderColor: rgba(168, 174, 177, 0.5);
-$borderColorFocus: #bdc3c7;
+$borderColor: #bdc3c7;
+$borderColorFocus: #1ABC9C;
+$backgroundColor: #FFF;
+$backgroundColorFocus: #ECF0F1;
 
 .form-control {
-  background-color: #fff;
+  background-color: $backgroundColor;
   background-image: none;
   display: block;
   width: 100%;
@@ -18,6 +20,7 @@ $borderColorFocus: #bdc3c7;
   transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 
   &:focus {
+    background-color: $backgroundColorFocus;
     border: 2px solid $borderColorFocus;
     outline: none;
   }
