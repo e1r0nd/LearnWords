@@ -1,3 +1,28 @@
+$borderColor: rgba(168, 174, 177, 0.5);
+$borderColorFocus: #bdc3c7;
+
+.form-control {
+  background-color: #fff;
+  background-image: none;
+  display: block;
+  width: 100%;
+  border: 2px solid $borderColor;
+  color: #34495e;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.467;
+  padding: 8px 12px;
+  height: 42px;
+  border-radius: 6px;
+  box-shadow: none;
+  transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+
+  &:focus {
+    border: 2px solid $borderColorFocus;
+    outline: none;
+  }
+}
+
 .inp-fld {
   display: inline-block;
   width: 80%;
