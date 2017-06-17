@@ -3,14 +3,14 @@ const Memorystore = [
     "index": "index1",
     "word": "das Auto",
     "translate": "car",
-    "step": "3",
+    "step": "1",
     "date": "0",
   },
   {
     "index": "index2",
     "word": "laufen",
     "translate": "run",
-    "step": "3",
+    "step": "2",
     "date": "0",
   },
   {
