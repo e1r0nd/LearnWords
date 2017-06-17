@@ -36,7 +36,7 @@ Main.appendChild(Settings.createBlock());
 
 import Memorystore from "./actions/Memorystore";
 // load the default words set if needed
-if (0 === storage.length) {
+if (null === storage.key("words")) {
   console.log("memorystore: start loading words");
   Words.loadWords(Memorystore);
   console.log("memorystore: words have been loaded");
@@ -58,11 +58,11 @@ Navigation.init();
 
 Learn.init();
 Learn.recountIndexLearn();
-Learn.showWord();
+// Learn.showWord();
 
 Repeat.init();
 Repeat.recountIndexRepeat();
-Repeat.showWord();
+// Repeat.showWord();
 
 Vocabulary.init();
 

@@ -4,23 +4,22 @@ storage.prefix = "LWdb";
 
 const Words = {
   loadWords(theWords) {
-    let i = 0;
-    const arrayOfKeys = [];
-    // const storeEachElement = ;
-
-    theWords.forEach((element, i) => {
-      // i = i + 1;
-      element.index = `index${i + 1}`;
-      // element.step =
-      element.date = 0;
-      storage.key(element.index, element);
-      arrayOfKeys.push(element.index);
-    });
-
-    storage.key("words", arrayOfKeys.join());
-    this.index = arrayOfKeys;
+    storage.key("words", theWords);
 
     console.log(`${arrayOfKeys.length} words have been loaded`);
+  },
+
+  storeWord(word) {
+    const words = storage.key("words");
+    const index = words.findIndex((el) => el.index === word.index);
+    // const newIndex = new Date().valueOf();
+
+    const id = (-1 === index) ? words.length : index;
+
+    words[id] = word;
+    storage.key("words", words); // Save word
+
+    return words;
   },
 
   dumpWords() {

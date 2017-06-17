@@ -3,10 +3,14 @@ import "./Learn.scss";
 
 import button from "../Button";
 
-import storage from "browser-lsc-storage";
-const localStorage = storage.local;
-localStorage.prefix = "LWdb";
+import Storage from "browser-lsc-storage";
+const storage = Storage.local;
+storage.prefix = "LWdb";
+
+import Settings from "../Settings";
+
 import locale from "../../actions/Locale";
+import Words from "../../actions/Words";
 
 const Learn = {
   init() {
@@ -14,7 +18,6 @@ const Learn = {
     this.currentIndex = 0;
     this.learnWordsNum = document.querySelector("#learnWordsNum");
     this.learnWordsTopNum = document.querySelector("#learnWordsTopNum");
-    this.learnWordsTopSNum = document.querySelector("#learnWordsTopSNum");
     this.learnWord = document.querySelector("#learnWord");
     this.translateWord = document.querySelector("#translateWord");
     this.learnWordsGrp = document.querySelector("#learnWordsGrp");
@@ -56,34 +59,35 @@ const Learn = {
   },
 
   recountIndexLearn() { // Count words to learn
-    if (!this.wordsLearn.length) {
-      const index = localStorage.key("words").split(",");
-      index.forEach((node) => { // The initial counting
-        const item = localStorage.key(node);
-        if (item && "0" === item.step) {
-          this.wordsLearn.push(item);
-        }
-      });
-    }
+    // if (!this.wordsLearn.length) {
+    // }
+    this.wordsLearn = [];
+
+    const wordsList = storage.key("words");
+    wordsList.forEach((item) => { // The initial counting
+      if (item && "0" === item.step) {
+        this.wordsLearn.push(item);
+      }
+    });
 
     console.log("Learn recountIndexLearn", this.wordsLearn);
-    const wordsLearnLength = this.wordsLearn.length || "";
+    const wordsLearnLength = this.wordsLearn.length || "0";
 
-    this.learnWordsNum.innerText = wordsLearnLength || "0";
-    // $(learnWordsTopNum).text(wordsLearnLength);
-    // $(learnWordsTopSNum).text(wordsLearnLength);
+    this.learnWordsNum.innerText = this.learnWordsTopNum.innerText = wordsLearnLength;
+
+    this.showWord();
   },
 
   showWord() { // Show a next word to learn
     if (this.wordsLearn.length) {
       this.learnWord.innerText = this.wordsLearn[this.currentIndex].word;
       this.translateWord.innerText = this.wordsLearn[this.currentIndex].translate;
-      this.learnWordsGrp.classList.remove("nodisplay");
-      this.noWordsLeft.classList.add("nodisplay");
+      this.learnWordsGrp.classList.remove("u--nodisplay");
+      this.noWordsLeft.classList.add("u--nodisplay");
     } else {
       this.allWordsOk.innerText = locale[locale.currentLocale].allWordsOk;
-      this.noWordsLeft.classList.remove("nodisplay");
-      this.learnWordsGrp.classList.add("nodisplay");
+      this.noWordsLeft.classList.remove("u--nodisplay");
+      this.learnWordsGrp.classList.add("u--nodisplay");
     }
   },
 
@@ -98,10 +102,11 @@ const Learn = {
         word: this.wordsLearn[this.currentIndex].word,
         translate: this.wordsLearn[this.currentIndex].translate,
         step,
-        date: ("1" === step) ? (getToday() + 864000000 * 1/* Settings.params.first*/) : 0,
+        date: ("1" === step) ? (getToday() + 864000000 * Settings.params.first) : 0,
       };
 
-      localStorage.key(this.wordsLearn[this.currentIndex].index, word); // Save word
+      // storage.key(this.wordsLearn[this.currentIndex].index, word); // Save word
+      Words.storeWord(word);
 
       if (reindex) {
         this.wordsLearn.splice(this.currentIndex, 1); // Remove from index

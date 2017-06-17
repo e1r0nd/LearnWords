@@ -4,9 +4,9 @@ import "./Settings.scss";
 import button from "../Button";
 import input from "../Input";
 
-import storage from "browser-lsc-storage";
-const localStorage = storage.local;
-localStorage.prefix = "LWdb";
+import Storage from "browser-lsc-storage";
+const storage = Storage.local;
+storage.prefix = "LWdb";
 import locale from "../../actions/Locale";
 
 const Settings = {
@@ -122,11 +122,11 @@ const Settings = {
       const errorTxt = ("empty" === errorName)
         ? locale[locale.currentlocale].errorEmpty
         : locale[locale.currentlocale].errorValid;
-      this.errorSettings.classList.remove("nodisplay");
+      this.errorSettings.classList.remove("u--nodisplay");
       this.errorSettings.innerText = errorTxt;
     } else { // Otherwise save new settings
       this.putSettings(settings);
-      this.errorSettings.classList.remove("nodisplay");
+      this.errorSettings.classList.remove("u--nodisplay");
       this.errorSettings.innerText = locale[locale.currentLocale].errorNo;
 
       this.params = settings; // Store locale
@@ -157,21 +157,21 @@ const Settings = {
   clearFields() {
     // Clear all error styles
     document.querySelectorAll(".form-group").forEach((node) => {
-      node.classList.remove("has-error");
+      node.classList.remove("u--haserror");
     });
-    document.querySelector("#errorSettings").classList.add("nodisplay");
+    document.querySelector("#errorSettings").classList.add("u--nodisplay");
   },
 
   setFieldError(self) {
     // Set the error style for the current input field
-    self.classList.add("has-error");
+    self.classList.add("u--haserror");
 
     return true;
   },
 
   getSettings() {
     // Read settings values
-    let settings = localStorage.key("settings");
+    let settings = storage.key("settings");
     if (!settings) {
       console.log("initialize settings");
       settings = {
@@ -179,15 +179,15 @@ const Settings = {
         second: 3,
         third: 7,
       };
-      localStorage.key("settings", settings);
-      localStorage.key("language", "en_GB");
+      storage.key("settings", settings);
+      storage.key("language", "en_GB");
     }
 
     return settings;
   },
 
   putSettings(theSettingsObj) {
-    localStorage.key("settings", theSettingsObj);
+    storage.key("settings", theSettingsObj);
   },
 };
 

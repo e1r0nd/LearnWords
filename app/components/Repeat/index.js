@@ -4,9 +4,11 @@ import "./Repeat.scss";
 import button from "../Button";
 import input from "../Input";
 
-import storage from "browser-lsc-storage";
-const localStorage = storage.local;
-localStorage.prefix = "LWdb";
+import Storage from "browser-lsc-storage";
+const storage = Storage.local;
+storage.prefix = "LWdb";
+
+import Words from "../../actions/Words";
 
 import Settings from "../Settings";
 import Learn from "../Learn";
@@ -46,7 +48,6 @@ const Repeat = {
     };
     this.repeatWordsNum = document.querySelector("#repeatWordsNum");
     this.repeatWordsTopNum = document.querySelector("#repeatWordsTopNum");
-    this.repeatWordsTopSNum = document.querySelector("#repeatWordsTopSNum");
     this.checkWord = document.querySelector("#checkWord");
     this.checkWordInp = document.querySelector("#checkWordInp");
     this.enterWordInp = document.querySelector("#enterWordInp");
@@ -59,9 +60,12 @@ const Repeat = {
       translates: [],
       words: [],
     };
+    this.words = storage.key("words");
 
-    document.querySelector("[data-type=checkWordBtn]").addEventListener("click", () => {
-      this.checkThisWord(this);
+    this.arrOptionButtons.forEach((node) => {
+      node.addEventListener("click", () => {
+        this.checkThisWord(this);
+      });
     });
     document.querySelector("#enterBtn").addEventListener("click", this.repeatWord.bind(this));
   },
@@ -74,9 +78,8 @@ const Repeat = {
   recountIndexRepeat() {
     // Count words to Repeat
     if (!this.wordsRepeat.first.length && !this.wordsRepeat.second.length && !this.wordsRepeat.third.length) {
-      const index = localStorage.key("words").split(",");
-      index.forEach((node) => { // Initial counting
-        const item = localStorage.key(node);
+      const wordsList = storage.key("words");
+      wordsList.forEach((item) => { // Initial counting
         if (item && (this.getToday() > item.date)) { // If this word is for today
           if ("1" === item.step) {
             this.wordsRepeat.first.push(item);
@@ -96,7 +99,9 @@ const Repeat = {
       + this.wordsRepeat.second.length
       + this.wordsRepeat.third.length;
 
-    this.repeatWordsNum.innerText = wordsRepeatTotal || "0";
+    this.repeatWordsNum.innerText = this.repeatWordsTopNum.innerText = wordsRepeatTotal || "0";
+
+    this.showWord();
   },
 
   showWord() { // Show a next word to Repeat
@@ -120,7 +125,7 @@ const Repeat = {
       }
 
       if (arrWords.includes(wordPlaceholder)) {
-        getWord.apply(this, index, arrWords);
+        getWord.call(this, index, arrWords);
       }
 
       return wordPlaceholder;
@@ -142,7 +147,7 @@ const Repeat = {
         node.innerText = wordPlaceholder;
       });
       this.enterBtn.dataset.direction = true;
-      this.checkWord.classList.remove("u--u--nodisplay");
+      this.checkWord.classList.remove("u--nodisplay");
       this.enterWord.classList.add("u--nodisplay");
       this.noWordsRepeat.classList.add("u--nodisplay");
     } else if (this.wordsRepeat.third.length) {
@@ -157,9 +162,9 @@ const Repeat = {
     }
   },
 
-  actionWord(step, reindex, word = "") {
+  actionWord(step, reindex, word = {}) {
     if (step) {
-      localStorage.key(this.wordsRepeat[this.currentIndex].word, word); // Save word
+      this.words = Words.storeWord(word);
 
       if (reindex) {
         this.wordsRepeat.splice(this.currentIndex, 1); // Remove from index
@@ -192,7 +197,8 @@ const Repeat = {
       word.step = (+word.step - 1).toString();
       word.date = (this.wordsRepeat.first.length) ? 0 : this.getToday() + 864000000 * Settings.params.first;
     }
-    localStorage.key(word.index, word); // Save word
+
+    this.storeWord(word); // Save word
     this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"].splice(0, 1); // Remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
@@ -215,7 +221,8 @@ const Repeat = {
       word.step = (+word.step - 1).toString();
       word.date = this.getToday() + 864000000 * Settings.params.second;
     }
-    localStorage.key(word.index, word); // Save word
+
+    this.storeWord(word); // Save word
     this.wordsRepeat.third.splice(0, 1); // Remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
