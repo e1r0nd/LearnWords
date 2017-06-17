@@ -1,12 +1,13 @@
 import settingsTmp from "./Settings.html";
 import "./Settings.scss";
 
+import button from "../Button";
 import input from "../Input";
 
 import storage from "browser-lsc-storage";
 const localStorage = storage.local;
 localStorage.prefix = "LWdb";
-import { locale } from "../../actions/Locale";
+import locale from "../../actions/Locale";
 
 const Settings = {
   createBlock() {
@@ -34,12 +35,28 @@ const Settings = {
       "dataToggle": "lang",
       "dataLang": "third",
     });
+    const saveSettings = button({
+      "id": "saveSettings",
+      "label": "Save",
+      "class": "btn btn-primary",
+      "dataLang": "saveBtn",
+    });
+    const cancelSettings = button({
+      "id": "cancelSettings",
+      "label": "Cancel",
+      "class": "btn btn-default",
+      "dataLang": "cancelBtn",
+    });
+
     const options = firstCheck + secondCheck + thirdCheck;
+    const buttons = saveSettings + cancelSettings;
     const html = document.createElement("div");
     html.id = "settings";
     html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
-    html.innerHTML = settingsTmp.replace(/{{options}}/g, options);
+    html.innerHTML = settingsTmp
+      .replace(/{{buttons}}/g, buttons)
+      .replace(/{{options}}/g, options);
 
     return html;
   },
@@ -110,7 +127,7 @@ const Settings = {
     } else { // Otherwise save new settings
       this.putSettings(settings);
       this.errorSettings.classList.remove("nodisplay");
-      this.errorSettings.innerText = locale[locale.currentlocale].errorNo;
+      this.errorSettings.innerText = locale[locale.currentLocale].errorNo;
 
       this.params = settings; // Store locale
     }
