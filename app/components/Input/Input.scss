@@ -2,6 +2,7 @@ $borderColor: #bdc3c7;
 $borderColorFocus: #1ABC9C;
 $backgroundColor: #FFF;
 $backgroundColorFocus: #ECF0F1;
+$errorColor: #E74C3C;
 
 .form-control {
   background-color: $backgroundColor;
@@ -29,6 +30,11 @@ $backgroundColorFocus: #ECF0F1;
 .inp-fld {
   display: inline-block;
   width: 80%;
+}
+
+.has-error {
+  color: $errorColor;
+  border-color: $errorColor;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {

@@ -4,7 +4,7 @@ import "./Vocabulary.scss";
 import rowTemplate from "../row-word/row-word.html";
 
 import button from "../Button";
-// import input from "../Input";
+import input from "../Input";
 
 import locale from "../../actions/Locale";
 
@@ -17,19 +17,37 @@ import Learn from "../Learn";
 
 const Vocabulary = {
   createBlock() {
-    const rememberBtn = button({
-      "id": "rememberBtn",
-      "label": "Remember",
+    const addBtn = button({
+      "id": "addBtn",
+      "label": "Add",
       "class": "btn btn-primary",
-      "dataLang": "rememberBtn",
+      "dataLang": "addBtn",
+    });
+    const inputWordTxt = input({
+      "id": "inputWordTxt",
+      "label": "Word",
+      "formClass": "form-group-right",
+      "placeholder": "Enter word",
+      "dataToggle": "lang",
+      "dataLang": "inputWordLbl",
+    });
+    const inputTranslate = input({
+      "id": "inputTranslate",
+      "label": "Translate",
+      "formClass": "form-group-right",
+      "placeholder": "Enter translate",
+      "dataToggle": "lang",
+      "dataLang": "inputTranslateLbl",
     });
 
-    const buttons = rememberBtn;
     const html = document.createElement("div");
     html.id = "vocabulary";
     html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
-    html.innerHTML = vocabularyTmp.replace(/{{buttons}}/g, buttons);
+    html.innerHTML = vocabularyTmp
+      .replace(/{{inputWordTxt}}/g, inputWordTxt)
+      .replace(/{{inputTranslate}}/g, inputTranslate)
+      .replace(/{{addBtn}}/g, addBtn);
 
     return html;
   },
@@ -50,17 +68,25 @@ const Vocabulary = {
 
     this.viewWord();
 
-    document.querySelector("#addBtn").addEventListener("click", this.addSaveWord(true, this));
-    document.querySelector(".js-edit-btn").addEventListener("click", () => {
-      document.querySelector(`#${this.dataset.node}`).style.display = "none";
-      document.querySelector(`#${this.dataset.node}Edit`).style.display = "block";
+    document.querySelector("#addBtn").addEventListener("click", this.addSaveWord.bind(this));
+    document.querySelectorAll(".js-edit-btn").forEach((node) => {
+      node.addEventListener("click", this.editWord);
     });
-    document.querySelector(".js-save-btn").addEventListener("click", this.addSaveWord);
-    document.querySelector(".js-del-btn").addEventListener("click", this.removeWord);
+    document.querySelectorAll(".js-save-btn").forEach((node) => {
+      node.addEventListener("click", this.addSaveWord);
+    });
+    document.querySelectorAll(".js-del-btn").forEach((node) => {
+      node.addEventListener("click", this.removeWord);
+    });
   },
 
   recountTotal() {
     document.querySelector("#totalWordsNum").innerText = localStorage.key("words").split(",").length;
+  },
+
+  editWord() {
+    document.querySelector(`#${this.dataset.node}`).style.display = "none";
+    document.querySelector(`#${this.dataset.node}Edit`).style.display = "block";
   },
 
   removeWord(notReindex) {
@@ -107,7 +133,9 @@ const Vocabulary = {
         contentInner = contentInner + this.rowTemplate
           .replace(/{{node}}/g, node)
           .replace(/{{txt}}/g, txt)
+          .replace(/'{{val_txt}}/g, txt)
           .replace(/{{translate}}/g, translate)
+          .replace(/'{{val_translate}}/g, translate)
           .replace(/{{index}}/g, index);
       }
     });
@@ -116,28 +144,26 @@ const Vocabulary = {
     this.recountTotal();
   },
 
-  addSaveWord(addWord, self) {
-    const wordTxt = (!addWord) ? document.querySelector(`#word-${this.dataset.node}`) : self.inputWordTxt;
-    const translate = (!addWord) ? document.querySelector(`#translate-${this.dataset.node}`) : self.inputTranslate;
-    const addForm = (!addWord) ? document.querySelector(`#form-${this.dataset.node}`) : self.addWordForm;
+  addSaveWord() {
+    const addWord = this.addSaveWord;
+
+    const wordTxt = (!addWord) ? document.querySelector(`#word-${this.dataset.node}`) : this.inputWordTxt;
+    const translate = (!addWord) ? document.querySelector(`#translate-${this.dataset.node}`) : this.inputTranslate;
+    const addForm = (!addWord) ? document.querySelector(`#form-${this.dataset.node}`) : this.addWordForm;
     const inputWord = wordTxt.value.trim();
     const inputTranslate = translate.value.trim();
-    const form = addForm;
+    // const form = addForm;
     let error = false;
     let word = {};
 
-    this.clearFields();
+    // this.clearFields();
     // Check for empty fields
-    if (!inputWord) {
-      error = this.setFieldError(form.children[0].children[0]);
-    } else if (!inputTranslate) {
-      error = this.setFieldError(form.children[1].children[0]);
-    }
+    !inputWord && (error = this.setFieldError(wordTxt));
+    !inputTranslate && (error = this.setFieldError(translate));
     if (error) { // Show error if any
-      this.errorVocabularyBox.classList.remove("nodisplay");
+      this.errorVocabularyBox.classList.remove("u--nodisplay");
       this.errorVocabulary.innerText = locale[locale.currentLocale].errorEmpty;
     } else { // Otherwise save new word to Vocabulary
-      let newIndexVal;
       const todayDate = new Date().valueOf();
       word = {
         index: todayDate,
@@ -148,33 +174,39 @@ const Vocabulary = {
       };
 
       // save newly added word
-      // const newIndexVal = `index${LW.index.length + 1}`;
+      const indexLength = localStorage.key("words").split(",").length;
+      const newIndexVal = `index${indexLength + 1}`;
+
       localStorage.key(`${newIndexVal}`, word);
 
-      // const contentInner = this.rowTemplate
-      // .replace(/{{node}}/g, todayDate)
-      // .replace(/{{txt}}/g, inputWord)
-      // .replace(/{{translate}}/g, inputTranslate)
-      // .replace(/{{index}}/g, (addWord) ? LW.index.length : LW.index.indexOf(inputWord));
+      const contentInner = this.rowTemplate
+      .replace(/{{node}}/g, todayDate)
+      .replace(/{{txt}}/g, inputWord)
+      .replace(/{{translate}}/g, inputTranslate)
+      .replace(/{{index}}/g, (addWord) ? indexLength : this.dataset.id);
 
       if (addWord) {
-        // LW.index.push(newIndexVal);
+        const newIndex = localStorage.key('index').split(",").push(newIndexVal).join(",");
+        localStorage.key("index", newIndex);
         wordTxt.value = "";
+        wordTxt.classList.remove("has-error");
         translate.value = "";
-        this.errorVocabularyBox.classList.remove("nodisplay");
-        this.errorVocabulary.innerText(locale[locale.currentLocal].errorNoW);
-        // this.vocabularyBox.appendChild(contentInner);
+        translate.classList.remove("has-error");
+        this.errorVocabularyBox.classList.remove("u--nodisplay");
+        this.errorVocabulary.innerText(locale[locale.currentLocale].errorNoW);
+        this.vocabularyBox.appendChild(contentInner);
       } else {
-        // const id = wordTxt.attr("id").slice(5);
+        const id = wordTxt.attr("id").slice(5);
 
-        // LW.index[LW.index.indexOf(id)] = newIndexVal;
-        // $(`#${id}`).before(contentInner);
-        // this.removeWord($(`#del-${id}`), true);
+        // localStorage.key("index"[LW.index.indexOf(id)] = newIndexVal;
+        document.querySelector(`#${id}`).innerHTML = contentInner;
+        this.removeWord($(`#del-${id}`), true);
       }
 
-      // LW.storeItem(`${LW.name}-words`, LW.index.join()); //add word to Vocabulary list
-      this.clearFields();
+      // localStorage.key("words", LW.index.join()); // add word to Vocabulary list
+      // this.clearFields();
       this.recountTotal();
+
       Learn.wordsLearn = [];
       Learn.recountIndexLearn();
       Learn.showWord();
@@ -186,7 +218,7 @@ const Vocabulary = {
       // Clear all error styles
       node.classList.remove("has-error");
     });
-    document.querySelector("#errorSettings").classList.add("nodisplay");
+    document.querySelector("#errorSettings").classList.add("u--nodisplay");
   },
 
   setFieldError(self) { // Set the error style for the current input field

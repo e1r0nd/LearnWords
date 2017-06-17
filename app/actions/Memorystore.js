@@ -8,8 +8,8 @@ const Memorystore = [
   },
   {
     "index": "index2",
-    "word": "laufen",
-    "translate": "run",
+    "word": "mein Hund",
+    "translate": "my dog",
     "step": "2",
     "date": "0",
   },

@@ -1,21 +1,13 @@
-<div class="row">
-  <form id="addWordForm" role="form">
-    <div class="">
-      <div class="form-group form-group-right">
-        <label for="inputWordTxt" data-lang="inputWordLbl" data-toggle="lang">Word</label>
-        <input type="text" class="form-control inp-fld" id="inputWordTxt" placeholder="Enter word" value="">
-      </div>
+<div class="">
+  <form id="addWordForm" role="form" action="#">
+    <div class="vocabulary__new-fld">
+      {{inputWordTxt}}
     </div>
-    <div class="">
-      <div class="form-group form-group-right">
-        <label for="inputTranslate" data-lang="inputTranslateLbl" data-toggle="lang">Translate</label>
-        <input type="text" class="form-control inp-fld" id="inputTranslate" placeholder="Enter translate" value="">
-      </div>
+    <div class="vocabulary__new-fld">
+      {{inputTranslate}}
     </div>
-    <div class="">
-      <button id="addBtn" type="button" class="btn btn-info">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
+    <div class="vocabulary__add-btn">
+      {{addBtn}}
     </div>
   </form>
 </div>
