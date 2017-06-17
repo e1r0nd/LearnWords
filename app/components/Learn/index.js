@@ -59,8 +59,6 @@ const Learn = {
   },
 
   recountIndexLearn() { // Count words to learn
-    // if (!this.wordsLearn.length) {
-    // }
     this.wordsLearn = [];
 
     const wordsList = storage.key("words");
@@ -70,11 +68,9 @@ const Learn = {
       }
     });
 
-    console.log("Learn recountIndexLearn", this.wordsLearn);
     const wordsLearnLength = this.wordsLearn.length || "0";
 
     this.learnWordsNum.innerText = this.learnWordsTopNum.innerText = wordsLearnLength;
-
     this.showWord();
   },
 
@@ -105,7 +101,6 @@ const Learn = {
         date: ("1" === step) ? (getToday() + 864000000 * Settings.params.first) : 0,
       };
 
-      // storage.key(this.wordsLearn[this.currentIndex].index, word); // Save word
       Words.storeWord(word);
 
       if (reindex) {

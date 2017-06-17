@@ -132,11 +132,10 @@ const Repeat = {
     }
 
     if (this.wordsRepeat.first.length || this.wordsRepeat.second.length) {
-      // const id = this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"][0].index;
       const arrWords = [];
       this.checkWordInp.innerText = (this.wordsRepeat[(this.wordsRepeat.first.length)
         ? "first"
-        : "second"][0][(this.wordsRepeat.first.length) ? "word" : "translate"]); // .data("id", id);
+        : "second"][0][(this.wordsRepeat.first.length) ? "word" : "translate"]);
 
       // The answer buttons are shuffled so that we don"t know which one is the correct word.
       this.shuffle(this.arrOptionButtons);

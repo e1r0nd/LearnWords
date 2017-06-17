@@ -58,11 +58,9 @@ Navigation.init();
 
 Learn.init();
 Learn.recountIndexLearn();
-// Learn.showWord();
 
 Repeat.init();
 Repeat.recountIndexRepeat();
-// Repeat.showWord();
 
 Vocabulary.init();
 
