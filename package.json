@@ -29,8 +29,7 @@
     "test": "mocha --compilers js:babel-core/register",
     "coverage": "istanbul cover --include-all-sources node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R spec test/",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "repository": {
     "type": "git",
