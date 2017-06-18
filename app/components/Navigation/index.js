@@ -113,8 +113,10 @@ const Navigation = {
     try {
       document.addEventListener("test", null, { get passive() {
         isSupported = true;
-      }});
-    } catch (e) { }
+      } });
+    } catch (e) {
+      console.log(e);
+    }
     this.supportsPassive = isSupported;
     return this.applyPassive();
   },
@@ -150,7 +152,7 @@ const Navigation = {
     this.currentX = evt.touches[0].pageX;
   },
 
-  onTouchEnd(evt) {
+  onTouchEnd() {
     if (!this.touchingSideNav) {
       return;
     }
@@ -199,7 +201,7 @@ const Navigation = {
     this.sideNavEl.classList.remove("side-nav--visible");
     this.detabinator.inert = true;
     this.sideNavEl.addEventListener("transitionend", this.onTransitionEnd);
-  }
+  },
 };
 
 export default Navigation;

@@ -6,7 +6,7 @@ const Words = {
   loadWords(theWords) {
     storage.key("words", theWords);
 
-    console.log(`${arrayOfKeys.length} words have been loaded`);
+    console.log(`${theWords.length} words have been loaded`);
   },
 
   storeWord(word) {

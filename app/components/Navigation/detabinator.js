@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 /**
  * Usage:
  * const detabinator = new Detabinator(element);
@@ -23,7 +22,7 @@
  * detabinator.inert = false; // Restores all focusable children of element
  * Limitations: Doesn't support Shadow DOM v0 :P
  */
-
+/* eslint-disable */
 export default class Detabinator {
   constructor(element) {
     if (!element) {
