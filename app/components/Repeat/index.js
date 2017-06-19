@@ -3,6 +3,7 @@ import "./Repeat.scss";
 
 import button from "../Button";
 import input from "../Input";
+import badge from "../Badge";
 
 import Storage from "browser-lsc-storage";
 const storage = Storage.local;
@@ -27,15 +28,13 @@ const Repeat = {
       "placeholder": "Enter word",
     });
 
-    const buttons = enterBtn;
-    const inputs = enterInp;
     const html = document.createElement("div");
     html.id = "repeat";
     html.classList.add("u--center", "u--nodisplay");
     html.dataset.toggle = "nav";
     html.innerHTML = repeatTmp
-      .replace(/{{buttons}}/g, buttons)
-      .replace(/{{inputs}}/g, inputs);
+      .replace(/{{buttons}}/g, enterBtn)
+      .replace(/{{inputs}}/g, enterInp);
 
     return html;
   },
@@ -133,9 +132,16 @@ const Repeat = {
 
     if (this.wordsRepeat.first.length || this.wordsRepeat.second.length) {
       const arrWords = [];
-      this.checkWordInp.innerText = (this.wordsRepeat[(this.wordsRepeat.first.length)
-        ? "first"
-        : "second"][0][(this.wordsRepeat.first.length) ? "word" : "translate"]);
+      const current = (this.wordsRepeat.first.length) ? "first" : "second";
+      const stepBadge = badge({
+        "id": "repeatStepBadge",
+        "label": this.wordsRepeat[current][0].step,
+        "class": "",
+      });
+      this.checkWordInp.innerHTML = (this.wordsRepeat[current][0][(this.wordsRepeat.first.length)
+      ? "word"
+      : "translate"])
+      + stepBadge;
 
       // The answer buttons are shuffled so that we don"t know which one is the correct word.
       this.shuffle(this.arrOptionButtons);
@@ -150,7 +156,13 @@ const Repeat = {
       this.enterWord.classList.add("u--nodisplay");
       this.noWordsRepeat.classList.add("u--nodisplay");
     } else if (this.wordsRepeat.third.length) {
-      this.enterWordInp.innerText = this.wordsRepeat.third[0].translate;
+      const stepBadge = badge({
+        "id": "repeatStepBadge",
+        "label": this.wordsRepeat[0].step,
+        "class": "",
+      });
+
+      this.enterWordInp.innerHTML = this.wordsRepeat.third[0].translate + stepBadge;
       this.checkWord.classList.add("u--nodisplay");
       this.enterWord.classList.remove("u--nodisplay");
       this.noWordsRepeat.classList.add("u--nodisplay");
@@ -197,7 +209,7 @@ const Repeat = {
       word.date = (this.wordsRepeat.first.length) ? 0 : this.getToday() + 864000000 * Settings.params.first;
     }
 
-    this.storeWord(word); // Save word
+    Words.storeWord(word); // Save word
     this.wordsRepeat[(this.wordsRepeat.first.length) ? "first" : "second"].splice(0, 1); // Remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
@@ -221,7 +233,7 @@ const Repeat = {
       word.date = this.getToday() + 864000000 * Settings.params.second;
     }
 
-    this.storeWord(word); // Save word
+    Words.storeWord(word); // Save word
     this.wordsRepeat.third.splice(0, 1); // Remove from index
     Learn.wordsLearn = [];
     Learn.recountIndexLearn();
