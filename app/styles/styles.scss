@@ -2,8 +2,6 @@ $body-background: #ECF0F1;
 $content-background: #fff;
 $text-color: #34495e;
 $link-color: #16a085;
-$badgeColor: #FFF;
-$badgeBackgroundColor: #1abc9c;
 
 * {
   box-sizing: border-box;
@@ -67,20 +65,6 @@ a {
 
 .u--pointer {
   cursor: pointer;
-}
-
-.u--badge {
-  color: $badgeColor;
-  background: $badgeBackgroundColor;
-  border-radius: 50%;
-  display: inline-block;
-  height: 32px;
-  vertical-align: middle;
-  width: 32px;
-  padding: 0;
-  margin: 0;
-  line-height: 32px;
-  text-align: center;
 }
 
 @media (max-width: 425px) {

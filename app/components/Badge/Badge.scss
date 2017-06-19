@@ -1,0 +1,48 @@
+$badgeColor: #FFFFFF;
+$badgeBackgroundColor: #1abc9c;
+$primary-color: #FFFFFF;
+$primary-background: #1ABC9C;
+$primary-hover-background: rgba(26, 188, 156, 0.7);
+$default-color: #FFFFFF;
+$default-background: #BDC3C7;
+$default-hover-background: rgba(168, 174, 177, 0.5);
+$info-color: #FFFFFF;
+$info-background: #3498DB;
+$info-hover-background: rgba(52, 152, 219, 0.6);
+
+.badge {
+  color: $badgeColor;
+  background: $badgeBackgroundColor;
+  border-radius: 50%;
+  display: inline-block;
+  height: 32px;
+  vertical-align: middle;
+  width: 32px;
+  padding: 0;
+  margin: 0;
+  line-height: 32px;
+  text-align: center;
+}
+
+.badge--default {
+    color: $default-color;
+    background-color: $default-background;
+}
+
+.badge--primary {
+    color: $primary-color;
+    background-color: $primary-background;
+}
+
+.badge--info {
+    color: $info-color;
+    background-color: $info-background;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  //
+}
+
+@media (max-width: 768px) {
+  //
+}

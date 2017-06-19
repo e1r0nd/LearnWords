@@ -4,6 +4,8 @@ import "./Navigation.scss";
 import Detabinator from "./detabinator";
 import locale from "../../actions/Locale";
 
+import badge from "../Badge";
+
 const Navigation = {
   init() {
     this.selected = "summary";
@@ -48,9 +50,22 @@ const Navigation = {
   },
 
   createBlock() {
+    const badgeLearnWordsTopNum = badge({
+      "id": "learnWordsTopNum",
+      "label": "",
+      "class": "",
+    });
+    const badgeRepeatWordsTopNum = badge({
+      "id": "repeatWordsTopNum",
+      "label": "",
+      "class": "",
+    });
+
     const html = document.createElement("div");
     html.classList.add("navigation");
-    html.innerHTML = navigationTmp;
+    html.innerHTML = navigationTmp
+      .replace(/{{badgeLearnWordsTopNum}}/g, badgeLearnWordsTopNum)
+      .replace(/{{badgeRepeatWordsTopNum}}/g, badgeRepeatWordsTopNum);
 
     return html;
   },
