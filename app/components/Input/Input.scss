@@ -7,18 +7,18 @@ $errorColor: #E74C3C;
 .form-control {
   background-color: $backgroundColor;
   background-image: none;
-  display: block;
-  width: 100%;
   border: 2px solid $borderColor;
-  color: #34495e;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.467;
-  padding: 8px 12px;
-  height: 42px;
   border-radius: 6px;
   box-shadow: none;
+  color: #34495e;
+  display: block;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  height: 42px;
+  line-height: 1.467;
+  padding: 8px 12px;
   transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+  width: 100%;
 
   &:focus {
     background-color: $backgroundColorFocus;
@@ -33,8 +33,8 @@ $errorColor: #E74C3C;
 }
 
 .u--haserror {
-  color: $errorColor;
   border-color: $errorColor;
+  color: $errorColor;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {

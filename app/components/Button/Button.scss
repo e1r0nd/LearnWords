@@ -10,19 +10,19 @@ $info-hover-background: rgba(52, 152, 219, 0.6);
 
 .btn {
   border: none;
-  padding: 10px 19px;
+  border-radius: 6px;
+  cursor: pointer;
   font-size: 17px;
   font-weight: normal;
   line-height: 1.471;
-  border-radius: 6px;
-  white-space: normal;
-  cursor: pointer;
+  padding: 10px 19px;
   transition: background-color 0.25s linear;
+  white-space: normal;
 }
 
 .btn-default {
-    color: $default-color;
     background-color: $default-background;
+    color: $default-color;
 
     &:hover {
       background-color: $default-hover-background;
@@ -30,8 +30,8 @@ $info-hover-background: rgba(52, 152, 219, 0.6);
 }
 
 .btn-primary {
-    color: $primary-color;
     background-color: $primary-background;
+    color: $primary-color;
 
     &:hover {
       background-color: $primary-hover-background;
@@ -39,8 +39,8 @@ $info-hover-background: rgba(52, 152, 219, 0.6);
 }
 
 .btn-info {
-    color: $info-color;
     background-color: $info-background;
+    color: $info-color;
 
     &:hover {
       background-color: $info-hover-background;

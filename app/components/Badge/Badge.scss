@@ -11,32 +11,32 @@ $info-background: #3498DB;
 $info-hover-background: rgba(52, 152, 219, 0.6);
 
 .badge {
-  color: $badgeColor;
   background: $badgeBackgroundColor;
   border-radius: 50%;
+  color: $badgeColor;
   display: inline-block;
   height: 32px;
+  line-height: 32px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
   vertical-align: middle;
   width: 32px;
-  padding: 0;
-  margin: 0;
-  line-height: 32px;
-  text-align: center;
 }
 
 .badge--default {
-    color: $default-color;
     background-color: $default-background;
+    color: $default-color;
 }
 
 .badge--primary {
-    color: $primary-color;
     background-color: $primary-background;
+    color: $primary-color;
 }
 
 .badge--info {
-    color: $info-color;
     background-color: $info-background;
+    color: $info-color;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {

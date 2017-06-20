@@ -5,6 +5,7 @@
 /bower_components
 /coverage
 /.coveralls.yml
+/.vscode
 
 # Logs
 logs
