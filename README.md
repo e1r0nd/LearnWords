@@ -17,6 +17,7 @@ Anatol Marezhanyi @e1r0nd_crg<br>
 http://linkedin.com/in/merezhany/<br>
 
 ## Contributors
+Iurii Merezhanyi https://github.com/merezhanyi<br>
 Hannes Hirzel https://github.com/hhzl<br>
 Kersing Huang
 
