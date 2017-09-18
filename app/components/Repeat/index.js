@@ -40,6 +40,10 @@ const Repeat = {
   },
 
   init() {
+    this.ONE_DAY = 864e2; // One day
+    this.ONE_WEEK = 6048e2; // 7 days
+    this.ONE_MONTH = 2592e3; // 30 days
+    this.ONE_YEAR = 31536e3;
     this.wordsRepeat = {
       first: [],
       second: [],
@@ -203,10 +207,10 @@ const Repeat = {
 
     if (self.innerText === ((this.wordsRepeat.first.length) ? word.translate : word.word)) {
       word.step = (+word.step + 1).toString();
-      word.date = this.getToday() + 864000000 * Settings.params[(this.wordsRepeat.first.length) ? "second" : "third"];
+      word.date = this.getToday() + this.ONE_DAY * Settings.params[(this.wordsRepeat.first.length) ? "second" : "third"];
     } else {
       word.step = (+word.step - 1).toString();
-      word.date = (this.wordsRepeat.first.length) ? 0 : this.getToday() + 864000000 * Settings.params.first;
+      word.date = (this.wordsRepeat.first.length) ? 0 : this.getToday() + this.ONE_DAY * Settings.params.first;
     }
 
     Words.storeWord(word); // Save word
@@ -230,7 +234,7 @@ const Repeat = {
       word.date = 0;
     } else {
       word.step = (+word.step - 1).toString();
-      word.date = this.getToday() + 864000000 * Settings.params.second;
+      word.date = this.getToday() + this.ONE_DAY * Settings.params.second;
     }
 
     Words.storeWord(word); // Save word
