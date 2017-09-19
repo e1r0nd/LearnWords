@@ -41,6 +41,14 @@ const Vocabulary = {
       "dataToggle": "lang",
       "dataLang": "inputTranslateLbl",
     });
+    const inputStep = input({
+      "id": "inputStep",
+      "label": "Step",
+      "formClass": "form-group-right",
+      "placeholder": "Enter current step",
+      "dataToggle": "lang",
+      "dataLang": "inputStepLbl",
+    });
 
     const html = document.createElement("div");
     html.id = "vocabulary";
@@ -49,6 +57,7 @@ const Vocabulary = {
     html.innerHTML = vocabularyTmp
       .replace(/{{inputWordTxt}}/g, inputWordTxt)
       .replace(/{{inputTranslate}}/g, inputTranslate)
+      .replace(/{{inputStep}}/g, inputStep)
       .replace(/{{addBtn}}/g, addBtn);
 
     return html;
@@ -63,6 +72,7 @@ const Vocabulary = {
     this.errorVocabulary = document.querySelector("#errorVocabulary");
     this.inputWordTxt = document.querySelector("#inputWordTxt");
     this.inputTranslate = document.querySelector("#inputTranslate");
+    this.inputStep = document.querySelector("#inputStep");
     this.addWordForm = document.querySelector("#addWordForm");
 
     this.viewWord();
@@ -125,7 +135,9 @@ const Vocabulary = {
         .replace(/{{txt}}/g, item.word)
         .replace(/'{{val_txt}}/g, item.word)
         .replace(/{{translate}}/g, item.translate)
-        .replace(/'{{val_translate}}/g, item.translate);
+        .replace(/'{{val_translate}}/g, item.translate)
+        .replace(/{{step}}/g, item.step)
+        .replace(/'{{val_step}}/g, item.step);
     });
 
     document.querySelector("#vocabularyBox").innerHTML = contentInner;
@@ -136,10 +148,11 @@ const Vocabulary = {
     const addWord = this.addSaveWord;
 
     const wordTxt = (!addWord) ? document.querySelector(`#word-${this.dataset.node}`) : this.inputWordTxt;
-    const translate = (!addWord) ? document.querySelector(`#translate-${this.dataset.node}`) : this.inputTranslate;
-    const inputId = (!addWord) ? this.dataset.node : new Date().valueOf();
     const inputWord = wordTxt.value.trim();
+    const translate = (!addWord) ? document.querySelector(`#translate-${this.dataset.node}`) : this.inputTranslate;
     const inputTranslate = translate.value.trim();
+    const inputStep = (!addWord) ? document.querySelector(`#step-${this.dataset.node}`).value.trim() || "0" : "0";
+    const inputId = (!addWord) ? this.dataset.node : new Date().valueOf();
     let error = false;
     let word = {};
 
@@ -154,7 +167,7 @@ const Vocabulary = {
         index: inputId,
         word: inputWord,
         translate: inputTranslate,
-        step: 0,
+        step: inputStep,
         date: 0,
       };
 
@@ -173,12 +186,15 @@ const Vocabulary = {
         tmp.innerHTML = rowTemplate
           .replace(/{{node}}/g, inputId)
           .replace(/{{txt}}/g, inputWord)
-          .replace(/{{translate}}/g, inputTranslate);
+          .replace(/{{translate}}/g, inputTranslate)
+          .replace(/{{step}}/g, inputStep);
         this.vocabularyBox.appendChild(tmp.firstChild);
         this.recountTotal();
       } else {
         document.querySelector(`#wordTxt-${inputId}`).innerText = inputWord;
         document.querySelector(`#translateTxt-${inputId}`).innerText = inputTranslate;
+        document.querySelector(`#stepTxt-${inputId}`).innerText = inputStep;
+        document.querySelector(`#step-${inputId}`).value = inputStep;
         document.querySelector(`#${this.dataset.node}`).classList.remove("u--nodisplay");
         document.querySelector(`#${this.dataset.node}Edit`).classList.add("u--nodisplay");
       }

@@ -28,6 +28,7 @@
   "allWordsOk": "No more words for learning.",
   "inputWordLbl": "Word",
   "inputTranslateLbl": "Translate",
+  "inputStepLbl": "Step",
   "enterBtn": "Check",
   "allWordsDone": "No more words for repeat."
 }

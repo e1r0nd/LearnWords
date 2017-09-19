@@ -28,6 +28,7 @@
   "allWordsOk": "Keine Worte mehr für das Lernen.",
   "inputWordLbl": "Wort",
   "inputTranslateLbl": "Übersetzen",
+  "inputStepLbl": "Stufe",
   "enterBtn": "Prüfen",
   "allWordsDone": "Keine Worte mehr für wiederholen."
 }

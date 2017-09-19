@@ -28,6 +28,7 @@
   "allWordsOk": "Нет больше слов для изучения.",
   "inputWordLbl": "Слово",
   "inputTranslateLbl": "Перевод",
+  "inputStepLbl": "Шаг",
   "enterBtn": "Проверить",
   "allWordsDone": "Нет больше слов для повторения."
 }
