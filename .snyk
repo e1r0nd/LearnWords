@@ -8,3 +8,8 @@ patch:
         patched: '2017-05-25T22:43:15.908Z'
     - webpack-dev-server > compression > debug > ms:
         patched: '2017-05-25T22:43:15.908Z'
+  'npm:debug:20170905':
+    - mocha > debug:
+        patched: '2017-09-28T22:43:29.763Z'
+    - webpack-dev-server > serve-index > debug:
+        patched: '2017-09-28T22:43:29.763Z'
