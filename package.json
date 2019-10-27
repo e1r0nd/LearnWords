@@ -66,11 +66,13 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "scss-loader": "0.0.1",
-    "snyk": "^1.41.1",
     "style-loader": "^0.13.1",
     "webpack": "^2.4.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^3.1.11"
   },
-  "snyk": true
+  "snyk": true,
+  "dependencies": {
+    "snyk": "^1.234.0"
+  }
 }
